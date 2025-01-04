@@ -1,0 +1,123 @@
+/* 481px */
+@media (max-width: 481px){
+    /* .header  */
+    .header {
+        padding: 28px 20px;
+    }
+
+    .logo {
+        width: 40px;
+        height: 40px;
+    }
+
+    .header_button1,
+    .header_button2 {
+        width: 32px;
+        height: 32px;
+    }
+
+    /* .home_section1 */
+    .home_section_h3 {
+        font-size: 24px;
+        line-height: 32px;
+    }
+
+    /* home_section2 */
+    .home_section2 {
+        padding:32px 0;
+        
+    }
+
+    .section2_section {
+        padding-inline: 20px;
+    }
+
+    .section2_h3 {
+        font-size: 24px;
+        line-height: 32px;
+    }
+
+    .section2_h3::after {
+        width: 156px;
+    }
+
+    /* catalog_section  */
+    .catalog_section {
+        padding: 32px 20px;
+        row-gap: 40px;
+    }
+
+    .catalog_sec_h2 {
+        display: none;
+    }
+
+    .catalog_span {
+        display: none;
+    }
+    .catalog_sec_button2{
+        justify-content: center;
+        width: 36px;
+        height: 32px;
+    }
+
+    .catalog_next_prev_none {
+        display: none;
+    }
+
+    .catalog_sec_sec3_button2,
+    .catalog_sec_sec3_button1 {
+        width: 52px;
+        height: 40px;
+        justify-content: center;
+    }
+
+    /* contact  */
+    .background_section {
+        padding-inline: 20px;
+    }
+
+    .input_section {
+        flex-direction: column;
+        row-gap: 36px;
+    }
+
+}   
+
+    /* 323px */
+ @media (max-width: 323px){
+        .header {
+            padding-inline: 8px;
+        }
+
+        /* .home_section1 */
+        .home_section1 {
+            height: 320px;
+        }
+
+        /* .home_section2 */
+        .section2_section {
+            padding-inline: 8px;
+        }
+        /* catalog_section  */
+        .catalog_section {
+            padding-inline: 8px;
+        }
+
+        /* contact  */
+        .background_section {
+            padding: 48px 8px;
+        }
+        
+        .form_section {
+            row-gap: 24px;
+        }
+
+        .input_section {
+            row-gap: 24px;
+        }
+
+        .form_section_h2 {
+            font-size: 24px;
+            line-height: 32px;
+        }
+}
