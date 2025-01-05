@@ -909,7 +909,7 @@
 
 .categoriesDiv {
     position: absolute;
- top: 56px;
+    top: 56px;
     display: flex;
     flex-direction: column;
     padding: 5px;
@@ -918,5 +918,10 @@
     row-gap: 7px;
     z-index: 3;
     border-radius: 10px;
+    height: 400px;
+    overflow-y: scroll;
+    scrollbar-width: thin; /* Firefox: Thin scrollbar */
+    scrollbar-color: #35a4b8 #023038; /* Firefox: Thumb and track colors */
+    
 }
 
