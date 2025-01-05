@@ -162,6 +162,8 @@ function fetchFunction(page, productPerPage, div, api='default') {
                 ///function two
                 function two() {
                     const totalPages = Math.ceil(data.total / productPerPage)
+                    pageCount.style.display = 'none'
+
                     pageCount.textContent = `Page ${page + 1} of ${totalPages}`;
 
                     createProduct(data, page, productPerPage, div, api)
@@ -222,7 +224,8 @@ function fetchFunction(page, productPerPage, div, api='default') {
                     //asc
                     function sortOptionAscEventListener() {
                         buttonSection.style.display = 'flex'
-        
+                        pageCount.style.display = 'flex'
+                        
                         arrowDown.style.transform = 'rotate(0deg)';      
                         catalogSecButton2.removeChild(sortOptionDesc);
                         catalogSecButton2.removeChild(sortByPopular);
@@ -282,6 +285,7 @@ function fetchFunction(page, productPerPage, div, api='default') {
                     //desk
                     function sortOptionDescEventListener() {
                         buttonSection.style.display = 'flex'
+                        pageCount.style.display = 'flex'
 
                         arrowDown.style.transform = 'rotate(0deg)';     
                         catalogSecButton2.removeChild(sortOptionAsc);
