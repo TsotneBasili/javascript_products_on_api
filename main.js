@@ -199,8 +199,6 @@ function fetchFunction(page, productPerPage, div, api='default') {
                         catalogSecButton2.removeChild(sortOptionDesc);
                         catalogSecButton2.removeChild(sortByPopular);
 
-                        
-
                         ascPage = 0
                         //prev_next asc buttons
                         //prev
@@ -258,7 +256,6 @@ function fetchFunction(page, productPerPage, div, api='default') {
                         buttonSection.style.display = 'flex'
 
                         arrowDown.style.transform = 'rotate(0deg)';     
-
                         catalogSecButton2.removeChild(sortOptionAsc);
                         catalogSecButton2.removeChild(sortByPopular);
 
@@ -456,6 +453,8 @@ function handleCatalogClick() {
      }
 
     if (clickCount % 2 === 1){
+        catalogSecButton2.style.display = 'flex'
+
         catalogSecButton2.appendChild(sortByPopular);
         catalogSecButton2.appendChild(sortOptionAsc);
         catalogSecButton2.appendChild(sortOptionDesc);

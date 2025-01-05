@@ -909,7 +909,7 @@
 
 .categoriesDiv {
     position: absolute;
- top: 50px;
+ top: 56px;
     display: flex;
     flex-direction: column;
     padding: 5px;

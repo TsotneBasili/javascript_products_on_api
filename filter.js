@@ -8,6 +8,7 @@ categoriesDiv.classList.add('categoriesDiv')
 
 
 let filterCategoriesCount = 0
+
 function filterCategoriesEventListener (){
 
     filterCategoriesCount += 1

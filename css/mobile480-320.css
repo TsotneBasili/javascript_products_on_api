@@ -52,12 +52,13 @@
     }
 
     .catalog_span {
-        display: none;
+        /* display: none; */
+        font-size: 5px;
     }
     .catalog_sec_button2{
         justify-content: center;
         width: 36px;
-        height: 32px;
+        /* height: 32px; */
     }
 
     .catalog_next_prev_none {
