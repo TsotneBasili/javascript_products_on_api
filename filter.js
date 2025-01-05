@@ -3,7 +3,7 @@ const filterCategories = document.querySelector('#filter_image')
 const categoriesDiv = document.createElement('div')
 categoriesDiv.classList.add('categoriesDiv')
 
-// filterSection.appendChild(categoriesDiv)
+
 
 
 
@@ -16,12 +16,8 @@ function filterCategoriesEventListener (){
     if (filterCategoriesCount % 2 === 1){
         createFiltercategory()
         filterSection.appendChild(categoriesDiv)
-
-
-    } else {
-        
+    } else {      
         filterSection.removeChild(categoriesDiv)
-
     }
     
 }
@@ -52,7 +48,10 @@ function createFiltercategory() {
                     // .then(console.log);
                     .then(category => {
                         productsDivCatalog.innerHTML = ''
-                        createProduct(category, 0, category.length, productsDivCatalog)
+                        createProduct(category, 0, category.length, productsDivCatalog, api=`${category}`)
+                        
+
+
                     });
                 }
                 categoryA.addEventListener('click', categoryAEventlistener)

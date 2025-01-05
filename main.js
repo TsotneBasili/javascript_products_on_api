@@ -16,9 +16,10 @@ const prevButtonSection = document.querySelector('#prevButtonSection')
 //popular
 const next = document.querySelector('#nextButton')
 const loadArrowImage = document.querySelector('#load_arrow_image')
-loadArrowImage.style.transform = 'rotate(90deg)'
+// loadArrowImage.style.transform = 'rotate(90deg)'
 const previous = document.querySelector('#previousButton')
-previous.style.display = 'none'
+// display none maqvs styleshi previousze tu agdgena daapire iq shecvale flex
+
 
 // asc button
 const nextAsc = document.createElement('button')
@@ -77,28 +78,51 @@ function createProduct(dataPassed, page, productPerPage, div, api='default') {
 
         productDiv.addEventListener('click', () => {
             if(div === productsDivCatalog) {
-            buttonSection.style.display = "none"
-            sortSection.style.display = "none"
-            filterSection.style.display = "none"
+                buttonSection.style.display = "none"
+                sortSection.style.display = "none"
+                filterSection.style.display = "none"
             }
             fetch(`https://dummyjson.com/products/${product.id}`)
                 .then(response => response.json())
                 .then((product) => {
-                    // console.log(product)
                     const backButton = document.createElement('button')
                     backButton.textContent = 'Go Back'
                     backButton.classList.add('.buttons')
                     backButton.style.cursor = 'pointer'
-                    backButton.addEventListener("click", () => {
-                        if(div === productsDivCatalog) {
-                            buttonSection.style.display = "flex"
-                            sortSection.style.display = "flex"
-                            filter.style.display = "flex"
-                            }
-                        div.removeChild(backButton);
-                        div.innerHTML = ('')
-                        fetchFunction(page, productPerPage, div, api)
-                    })
+
+                    if(api !== 'default' && api !== 'asc' && api !== 'desc'){                        
+                        backButton.addEventListener("click", () => {
+                            if(div === productsDivCatalog) {
+                                sortSection.style.display = "flex"
+                                filter.style.display = "flex"
+                                }
+                            div.removeChild(backButton);
+                            div.innerHTML = ('')
+                            
+                            
+                            fetch(`https://dummyjson.com/products/category/${product.category}`)
+                            .then(res => res.json())
+                            // .then(console.log);
+                            .then(category => {
+                                productsDivCatalog.innerHTML = ''
+                                createProduct(category, 0, category.length, productsDivCatalog, api=`${category.category}`)
+                                
+                            });
+
+                        })
+                    } else {
+                        backButton.addEventListener("click", () => {
+                            if(div === productsDivCatalog) {
+                                buttonSection.style.display = "flex"
+                                sortSection.style.display = "flex"
+                                filter.style.display = "flex"
+                                }
+                            div.removeChild(backButton);
+                            div.innerHTML = ('')
+                            fetchFunction(page, productPerPage, div, api)
+                        })
+                    }
+                    
 
                     div.innerHTML = (`
                         <article class="catalog_sec_sec2_article">
@@ -117,7 +141,6 @@ function createProduct(dataPassed, page, productPerPage, div, api='default') {
                 })
         })
         
-
         div.appendChild(productDiv)
     })
 }
@@ -183,6 +206,7 @@ function fetchFunction(page, productPerPage, div, api='default') {
                     //sorting
                     //popular
                     function sortByPopularEventListener() {
+                        buttonSection.style.display = 'flex'
                         
                         window.location.href = './catalog.html'
         
@@ -402,9 +426,9 @@ function fetchFunction(page, productPerPage, div, api='default') {
 ///homepage
 const productsDivHome = document.querySelector('#homeCatalog')
 let homeCurrentPage = 0
-let homePerPageCatalog = 4;
+let productPerpageHome = 4;
 
-fetchFunction(homeCurrentPage, homePerPageCatalog, productsDivHome)
+fetchFunction(homeCurrentPage, productPerpageHome, productsDivHome)
 
 
 //catalog

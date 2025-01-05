@@ -487,7 +487,8 @@
 }
 
 .catalog_sec_sec3_button1 {
-    display: flex;
+    display: none;
+    /* display: flex; */
     align-items: center;
     justify-content: space-between;
     padding: 8px;
