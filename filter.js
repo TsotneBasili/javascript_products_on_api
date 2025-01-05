@@ -38,7 +38,7 @@ function createFiltercategory() {
                 categoryA.href = '';
                 categoryA.classList.add('delete')
                 categoryA.innerHTML = `      
-                        ${category}.                     
+                        ${category}                     
                 `
                 function categoryAEventlistener (){
                 buttonSection.style.display = 'none'

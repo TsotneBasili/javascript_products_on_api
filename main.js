@@ -15,10 +15,10 @@ const prevButtonSection = document.querySelector('#prevButtonSection')
 
 //popular
 const next = document.querySelector('#nextButton')
-const loadArrowImage = document.querySelector('#load_arrow_image')
-// loadArrowImage.style.transform = 'rotate(90deg)'
+let loadArrowImage = document.querySelector('#load_arrow_image')
+// loadArrowImage.style.transform = 'rotate(90deg)';
 const previous = document.querySelector('#previousButton')
-// display none maqvs styleshi previousze tu agdgena daapire iq shecvale flex
+// display none maqvs styleshi previousze tu agdgena daapire iq shecvale flex da catalog htmlshic uncoment gaukete
 
 
 // asc button
@@ -90,7 +90,7 @@ function createProduct(dataPassed, page, productPerPage, div, api='default') {
                     backButton.classList.add('.buttons')
                     backButton.style.cursor = 'pointer'
 
-                    if(api !== 'default' && api !== 'asc' && api !== 'desc'){                        
+                    if(api !== 'default' && api !== 'asc' && api !== 'desc' && api !== "popular"){                        
                         backButton.addEventListener("click", () => {
                             if(div === productsDivCatalog) {
                                 sortSection.style.display = "flex"
@@ -119,7 +119,12 @@ function createProduct(dataPassed, page, productPerPage, div, api='default') {
                                 }
                             div.removeChild(backButton);
                             div.innerHTML = ('')
-                            fetchFunction(page, productPerPage, div, api)
+
+                            if(api === 'default' || api === 'asc' || api === 'desc'){
+                                fetchFunction(page, productPerPage, div, api)
+                            } else {
+                            fetchFunction(0, (page + 1) * productPerPage, div, api)   ////////////////////////gasaumjobesebelia  roca backbuttons vacher iqamde mabrunebs romel postzec davachire mara magis shemdeg tu maqvs load dacherili imat agar achvenebs.
+                            }
                         })
                     }
                     
@@ -146,7 +151,6 @@ function createProduct(dataPassed, page, productPerPage, div, api='default') {
 }
 
 function fetchFunction(page, productPerPage, div, api='default') {
-    
     function random (){
         fetch(`https://dummyjson.com/products?limit=${productPerPage}&skip=${page * productPerPage}`)
             .then(Response => Response.json())
@@ -160,7 +164,7 @@ function fetchFunction(page, productPerPage, div, api='default') {
                     const totalPages = Math.ceil(data.total / productPerPage)
                     pageCount.textContent = `Page ${page + 1} of ${totalPages}`;
 
-                    createProduct(data, page, productPerPage, div)
+                    createProduct(data, page, productPerPage, div, api)
 
                     //DONT DELETE IN CASE YOU WANT TO REMAKE POPULA PAGE IN NEXT PREVIOUSE BUTTON PAGE AGAIN INSTEAD OF LOAD PAGE
                     //next-prev buttons
@@ -196,7 +200,7 @@ function fetchFunction(page, productPerPage, div, api='default') {
                         buttonSection.removeChild(next);
                         pageCount.textContent = `Page ${page + 1} of ${totalPages}`;
                         // div.innerHTML = ``;  if you want to make it next button uncomment this and previouse button above and display none in buttons above
-                        fetchFunction(page, productPerPage, div);
+                        fetchFunction(page, productPerPage, div, "popular");
                     }
 
                     next.addEventListener('click', handleNextClick);
@@ -413,7 +417,7 @@ function fetchFunction(page, productPerPage, div, api='default') {
 
     if (div === productsDivHome) {
         random()
-    } else if (div === productsDivCatalog && api === 'default') {
+    } else if (div === productsDivCatalog && api === "popular") {
         random()
     } else if(div === productsDivCatalog && api === 'asc'){
         fetchFunctionasc()
@@ -436,7 +440,7 @@ const productsDivCatalog = document.querySelector('.catalog_sec_sec2')
 const catalogCurrentPage = 0;
 const productPerPageCatalog = 4;
 
-fetchFunction(catalogCurrentPage, productPerPageCatalog, productsDivCatalog)
+fetchFunction(catalogCurrentPage, productPerPageCatalog, productsDivCatalog, "popular")
 
 //catalog asc
 let ascPage = 0
