@@ -4,13 +4,21 @@ const starNormal = `<i class="fa-regular fa-star"></i>`;
 
 const pageCount = document.querySelector('#pageCount')
 
+// sort_filter_sections
+const sortSection = document.querySelector('#sort_by')
+const filterSection = document.querySelector('#filter')
+
+
 //buttonsection
 const buttonSection = document.querySelector('#buttonSection')
 const prevButtonSection = document.querySelector('#prevButtonSection')
 
 //popular
 const next = document.querySelector('#nextButton')
+const loadArrowImage = document.querySelector('#load_arrow_image')
+loadArrowImage.style.transform = 'rotate(90deg)'
 const previous = document.querySelector('#previousButton')
+previous.style.display = 'none'
 
 // asc button
 const nextAsc = document.createElement('button')
@@ -70,6 +78,8 @@ function createProduct(dataPassed, page, productPerPage, div, api='default') {
         productDiv.addEventListener('click', () => {
             if(div === productsDivCatalog) {
             buttonSection.style.display = "none"
+            sortSection.style.display = "none"
+            filterSection.style.display = "none"
             }
             fetch(`https://dummyjson.com/products/${product.id}`)
                 .then(response => response.json())
@@ -82,6 +92,8 @@ function createProduct(dataPassed, page, productPerPage, div, api='default') {
                     backButton.addEventListener("click", () => {
                         if(div === productsDivCatalog) {
                             buttonSection.style.display = "flex"
+                            sortSection.style.display = "flex"
+                            filter.style.display = "flex"
                             }
                         div.removeChild(backButton);
                         div.innerHTML = ('')
@@ -127,28 +139,29 @@ function fetchFunction(page, productPerPage, div, api='default') {
 
                     createProduct(data, page, productPerPage, div)
 
+                    //DONT DELETE IN CASE YOU WANT TO REMAKE POPULA PAGE IN NEXT PREVIOUSE BUTTON PAGE AGAIN INSTEAD OF LOAD PAGE
                     //next-prev buttons
                     //previous
-                    if (page != 0) {
-                        prevButtonSection.appendChild(previous)
+                    // if (page != 0) {
+                    //     prevButtonSection.appendChild(previous)
 
-                    } else if (page === 0) {
-                        prevButtonSection.removeChild(previous)
+                    // } else if (page === 0) {
+                    //     prevButtonSection.removeChild(previous)
 
-                    }
+                    // }
 
-                    function handlePreviousClick() {
-                        page -= 1;
-                        prevButtonSection.removeChild(previous);
-                        pageCount.textContent = `Page ${page + 1} of ${totalPages}`;
-                        div.innerHTML = ``;
-                        fetchFunction(page, productPerPage, div);
-                    }
+                    // function handlePreviousClick() {
+                    //     page -= 1;
+                    //     prevButtonSection.removeChild(previous);
+                    //     pageCount.textContent = `Page ${page + 1} of ${totalPages}`;
+                    //     div.innerHTML = ``;
+                    //     fetchFunction(page, productPerPage, div);
+                    // }
 
-                    previous.addEventListener('click', handlePreviousClick);
+                    // previous.addEventListener('click', handlePreviousClick);
                     //previous
 
-                    //next
+                    //next for load
                     if (page === Math.ceil(data.total / productPerPage)) {
                         buttonSection.removeChild(next)
                     } else if (page < Math.ceil(data.total / productPerPage) - 1) {
@@ -159,7 +172,7 @@ function fetchFunction(page, productPerPage, div, api='default') {
                         page += 1;
                         buttonSection.removeChild(next);
                         pageCount.textContent = `Page ${page + 1} of ${totalPages}`;
-                        div.innerHTML = ``;
+                        // div.innerHTML = ``;  if you want to make it next button uncomment this and previouse button above and display none in buttons above
                         fetchFunction(page, productPerPage, div);
                     }
 
@@ -180,7 +193,8 @@ function fetchFunction(page, productPerPage, div, api='default') {
   /////////////////////////////////////////////////////////////////////////////////////////                  
                     //asc
                     function sortOptionAscEventListener() {
-
+                        buttonSection.style.display = 'flex'
+        
                         arrowDown.style.transform = 'rotate(0deg)';      
                         catalogSecButton2.removeChild(sortOptionDesc);
                         catalogSecButton2.removeChild(sortByPopular);
@@ -241,6 +255,8 @@ function fetchFunction(page, productPerPage, div, api='default') {
 
                     //desk
                     function sortOptionDescEventListener() {
+                        buttonSection.style.display = 'flex'
+
                         arrowDown.style.transform = 'rotate(0deg)';     
 
                         catalogSecButton2.removeChild(sortOptionAsc);
@@ -403,13 +419,12 @@ fetchFunction(catalogCurrentPage, productPerPageCatalog, productsDivCatalog)
 
 //catalog asc
 let ascPage = 0
-const productPerPageCatalogAsc = 3;
+const productPerPageCatalogAsc = 8;
 
 
 //catalog desc
 let descPage = 0
-
-const productPerPageCatalogDesc = 5
+const productPerPageCatalogDesc = 4;
 
 
 ///sorting

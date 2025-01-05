@@ -15,7 +15,7 @@
     top: 0;
     /* left: 50%;
     transform: translate(-50%); */
-    z-index: 1;
+    z-index:4;
 
     background-color: #012426;
     padding: 16px 94px;
@@ -312,6 +312,7 @@
     position: relative;
     top:100px;
 
+    z-index: 2;
     display: flex;
     justify-content: center;
     padding-block: 48px;
@@ -413,6 +414,8 @@
 }
 
 .catalog_sec_sec1_sec1 {
+    position: relative;
+
     display: flex;
     column-gap: 16px;
     align-items: center;
@@ -433,6 +436,8 @@
 }
 
 .catalog_sec_button1 {
+    position: relative;
+
     background-color: transparent;
     border-style: none;
     cursor: pointer;
@@ -890,3 +895,28 @@
 .not_validated {
     background-color: #2C4246CC;
 }
+
+
+/* filter */
+
+.delete {
+    font-size: 19px;
+    color: white;
+    background-color: #023038;
+    border-radius: 10px;
+
+}
+
+.categoriesDiv {
+    position: absolute;
+ top: 50px;
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+    background-color: #023038;
+    font-family: "Inter", serif;
+    row-gap: 7px;
+    z-index: 3;
+    border-radius: 10px;
+}
+
