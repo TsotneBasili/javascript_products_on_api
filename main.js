@@ -1,4 +1,3 @@
-//fetch function
 const starSOlid = `<i class="fa-solid fa-star"></i>`;
 const starNormal = `<i class="fa-regular fa-star"></i>`;
 
@@ -303,8 +302,9 @@ function fetchFunction(page, productPerPage, div, api='default') {
 
                        //prevDesc                   
                         function prevDescEventListener() {
-                            descPage -= 1
                             prevButtonSection.removeChild(prevDesc)
+
+                            descPage -= 1
                             pageCount.textContent = `Page ${descPage} of ${totalPages}`;
                             div.innerHTML = (`
                                 `);
@@ -399,9 +399,9 @@ function fetchFunction(page, productPerPage, div, api='default') {
 
                     
                     //desc
-                    if (page != 0 ) {
+                    if (page >= 1 ) {
                         prevButtonSection.appendChild(prevDesc)
-                    } else if (page === 0) {
+                    } else if (page < 1) {
                         if (prevButtonSection.contains(prevDesc)) {
                             prevButtonSection.removeChild(prevDesc);
                         }

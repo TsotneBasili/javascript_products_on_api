@@ -41,9 +41,19 @@
                 <img src="images/home_images/wpf_guitar.svg" alt="" class="logo">
             </a>
 
+            
             <section class="header_section">
-                <button class="header_button1">
-                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                <button id="searchButton" class="header_button1">
+
+                    <div id="searchDiv">
+                        <form id="formId">
+                            <input class="searchInput" type="search" id="searchInput" placeholder="Type something...">
+                        </form>
+                        <ul id="putProducts">
+                        </ul>
+                    </div>
+                    <i id="magnifyingGlass" class="fa-solid fa-magnifying-glass magnifying_glass_width"></i>
                 </button>
 
                 <button id="user_button" class="header_button2">
@@ -167,6 +177,7 @@
     <script src="sign_in.js"></script>
     <script src="burger.js"></script>
     <script src="filter.js"></script>
+    <script src="./search.js"></script>
 
 </body>
 </html>

@@ -82,8 +82,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    column-gap: 5px;
 
     width: 40px;
+    /* width: min(40px, 80px); */
     height: 40px;
     background-color: transparent;
     border: 2px solid #05BCCA;
@@ -93,6 +95,12 @@
     cursor: pointer;
     
     transition: 0.3s;
+}
+
+.searchInput {
+    background-color: transparent;
+    border-radius: 5px;
+    color: #05BCCA;
 }
 
 .header_button2 {
@@ -925,3 +933,27 @@
     
 }
 
+
+
+#formId {
+    position: relative;
+
+}
+
+#putProducts {
+    display: flex;
+    flex-direction: column;
+
+    position: absolute;
+    z-index: 1;
+
+    top: 50px;
+
+    background-color: #023038;
+    font-family: "Inter", serif;
+
+    /* overflow-y: scroll;
+    height: 100px;
+    scrollbar-width: thin; 
+    scrollbar-color: #35a4b8 #023038; */
+}
