@@ -1,8 +1,3 @@
-// fetch('https://dummyjson.com/products/search?q=phone')
-// .then(res => res.json())
-// .then(console.log);
-
-
 const searchButton = document.getElementById('searchButton');
 const putProducts = document.getElementById('putProducts');
 const magnifyingGlass = document.getElementById('magnifyingGlass');
@@ -51,7 +46,7 @@ searchInput.addEventListener('keyup', (event) => {
                     putProducts.appendChild(liProduct); 
 
                     liProduct.addEventListener('click', () => {
-                        console.log(liProduct)
+                        // console.log(liProduct)
 
                         buttonSection.style.display = 'none'
                         sortSection.style.display = "none"
@@ -115,7 +110,6 @@ searchInput.addEventListener('keyup', (event) => {
 })
 });
 
-putProducts.innerHTML = '';
 
 
 
