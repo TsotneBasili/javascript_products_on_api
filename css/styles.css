@@ -3,7 +3,6 @@
 /* container  */
 .container {
     width: min(100%, 1440px);
-    /* min-width: 100%; */
     margin: auto;
 }
 
@@ -219,13 +218,15 @@
 
 .section2_section {
     display: flex;
-    column-gap: 20px;
+    flex-wrap: wrap;
+    justify-content:center;
+    gap: 15px 15px;
 }
 
 .section2_section_article {
     padding: 8px;
     background-color: #2C4246;
-    width: min(100%, 298px);
+    width: min(100%, 200px);
     cursor: pointer;
     transition: all 0.3s linear; 
     border: 1px solid #05BCCA;
@@ -956,4 +957,16 @@
     height: 100px;
     scrollbar-width: thin; 
     scrollbar-color: #35a4b8 #023038; */
+}
+
+
+.buttons {
+    background-color: #023038;
+    color: #35a4b8;
+    border-radius: 5px;
+}
+
+
+#load_arrow_image {
+    transform: rotate(90deg);
 }

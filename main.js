@@ -56,11 +56,13 @@ prevDesc.innerHTML = `
 `;
 
 
-function createProduct(dataPassed, page, productPerPage, div, api='default') {
+function createProduct(dataPassed, page, productPerPage, div, api = 'default') {
+    let cartHovered = false; // Flag to track if the cart is being hovered
+
     dataPassed.products.forEach(product => {
         const productDiv = document.createElement('div');
-        const rating = Math.round(product.rating)
-        const stars = starSOlid.repeat(rating) + starNormal.repeat(5 - rating)
+        const rating = Math.round(product.rating);
+        const stars = starSOlid.repeat(rating) + starNormal.repeat(5 - rating);
         productDiv.innerHTML = (`
             <article class="catalog_sec_sec2_article">
                 <img class="catalog_sec_sec2_article_image" src="${product.thumbnail}">
@@ -70,63 +72,59 @@ function createProduct(dataPassed, page, productPerPage, div, api='default') {
                     <div class="text-warning">
                         ${stars}
                     </div>
-                    <i class="fa-sharp fa-solid fa-cart-plus section3_cart"></i>
+                    <i class="fa-sharp fa-solid fa-cart-plus section3_cart addToCart"></i>
                 </span> 
             </article>
         `);
 
-        productDiv.addEventListener('click', () => {
-            if(div === productsDivCatalog) {
-                buttonSection.style.display = "none"
-                sortSection.style.display = "none"
-                filterSection.style.display = "none"
+        function productDiveventListener(event) {
+            if (cartHovered) return; // If cart is hovered, block interaction
+            if (div === productsDivCatalog) {
+                buttonSection.style.display = "none";
+                sortSection.style.display = "none";
+                filterSection.style.display = "none";
             }
             fetch(`https://dummyjson.com/products/${product.id}`)
                 .then(response => response.json())
                 .then((product) => {
-                    const backButton = document.createElement('button')
-                    backButton.textContent = 'Go Back'
-                    backButton.classList.add('.buttons')
-                    backButton.style.cursor = 'pointer'
+                    const backButton = document.createElement('button');
+                    backButton.textContent = 'Go Back';
+                    backButton.classList.add('buttons');
+                    backButton.style.cursor = 'pointer';
 
-                    if(api !== 'default' && api !== 'asc' && api !== 'desc' && api !== "popular"){                        
+                    if (api !== 'default' && api !== 'asc' && api !== 'desc' && api !== "popular") {
                         backButton.addEventListener("click", () => {
-                            if(div === productsDivCatalog) {
-                                sortSection.style.display = "flex"
-                                filter.style.display = "flex"
-                                }
+                            if (div === productsDivCatalog) {
+                                sortSection.style.display = "flex";
+                                filter.style.display = "flex";
+                            }
                             div.removeChild(backButton);
-                            div.innerHTML = ('')
-                            
-                            
-                            fetch(`https://dummyjson.com/products/category/${product.category}`)
-                            .then(res => res.json())
-                            // .then(console.log);
-                            .then(category => {
-                                productsDivCatalog.innerHTML = ''
-                                createProduct(category, 0, category.length, productsDivCatalog, api=`${category.category}`)
-                                
-                            });
+                            div.innerHTML = '';
 
-                        })
+                            fetch(`https://dummyjson.com/products/category/${product.category}`)
+                                .then(res => res.json())
+                                .then(category => {
+                                    productsDivCatalog.innerHTML = '';
+                                    createProduct(category, 0, category.length, productsDivCatalog, api = `${category.category}`);
+                                });
+                        });
                     } else {
                         backButton.addEventListener("click", () => {
-                            if(div === productsDivCatalog) {
-                                buttonSection.style.display = "flex"
-                                sortSection.style.display = "flex"
-                                filter.style.display = "flex"
-                                }
-                            div.removeChild(backButton);
-                            div.innerHTML = ('')
-
-                            if(api === 'default' || api === 'asc' || api === 'desc'){
-                                fetchFunction(page, productPerPage, div, api)
-                            } else {
-                            fetchFunction(0, (page + 1) * productPerPage, div, api)   ////////////////////////gasaumjobesebelia  roca backbuttons vacher iqamde mabrunebs romel postzec davachire mara magis shemdeg tu maqvs load dacherili imat agar achvenebs.
+                            if (div === productsDivCatalog) {
+                                buttonSection.style.display = "flex";
+                                sortSection.style.display = "flex";
+                                filter.style.display = "flex";
                             }
-                        })
+                            div.removeChild(backButton);
+                            div.innerHTML = '';
+
+                            if (api === 'default' || api === 'asc' || api === 'desc') {
+                                fetchFunction(page, productPerPage, div, api);
+                            } else {
+                                fetchFunction(0, (page + 1) * productPerPage, div, api);
+                            }
+                        });
                     }
-                    
 
                     div.innerHTML = (`
                         <article class="catalog_sec_sec2_article">
@@ -140,14 +138,35 @@ function createProduct(dataPassed, page, productPerPage, div, api='default') {
                                 <i class="fa-sharp fa-solid fa-cart-plus section3_cart"></i>
                             </span> 
                         </article>
-                    `); 
+                    `);
                     div.appendChild(backButton);
-                })
-        })
-        
-        div.appendChild(productDiv)
-    })
+                });
+        }
+
+        productDiv.addEventListener('click', productDiveventListener);
+
+        const addToCartButton = productDiv.querySelector('.addToCart');
+        addToCartButton.addEventListener('mouseenter', () => {
+            cartHovered = true; // Disable interactions when cart is hovered
+            console.log('Mouse entered cart, product divs disabled.');
+        });
+
+        addToCartButton.addEventListener('click', function addToCartButtonEventListener(event){
+            event.stopPropagation();
+            const cartDiv = productDiv.cloneNode(true)
+            cartListDiv.appendChild(cartDiv)
+        });
+
+        addToCartButton.addEventListener('mouseleave', () => {
+            cartHovered = false; // Re-enable interactions when mouse leaves cart
+            console.log('Mouse left cart, product divs enabled.');
+        });
+
+        div.appendChild(productDiv);
+    });
 }
+
+
 
 function fetchFunction(page, productPerPage, div, api='default') {
     function random (){
@@ -504,3 +523,6 @@ function handleCatalogClick() {
 }
 
 catalogSecButton2.addEventListener('click', handleCatalogClick);
+
+
+
