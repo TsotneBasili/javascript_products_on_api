@@ -155,8 +155,15 @@ function createProduct(dataPassed, page, productPerPage, div, api = 'default') {
 
         addToCartButton.addEventListener('click', function addToCartButtonEventListener(event){
             event.stopPropagation();
+
+            if (div === productsDivCatalog){
             const cartDiv = productDiv.cloneNode(true)
             cartListDiv.appendChild(cartDiv)
+            } else {
+                const cartDivHome = productDiv.cloneNode(true)
+                cartListDivHome.appendChild(cartDivHome)   
+            }
+            
         });
 
         addToCartButton.addEventListener('mouseleave', () => {
@@ -525,6 +532,7 @@ function handleCatalogClick() {
 }
 
 catalogSecButton2.addEventListener('click', handleCatalogClick);
+
 
 
 
