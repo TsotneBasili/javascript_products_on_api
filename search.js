@@ -1,10 +1,20 @@
+
+
+
+/////////////////////////////////////////////////////////////
+
 const searchButton = document.getElementById('searchButton');
+// const searchButtonContact = document.getElementById('searchButtonContact');
+// const searchButtonUser = document.getElementById('searchButtonUser');
+
+
 const putProducts = document.getElementById('putProducts');
 const magnifyingGlass = document.getElementById('magnifyingGlass');
 
 
 let searchButtonCount = 0
-function searchButtonListener() {
+function searchButtonListener(event) {
+    event.stopPropagation()
     searchButtonCount += 1
 
     if (searchButtonCount % 2 === 1) {
@@ -29,8 +39,9 @@ const searchInput = document.getElementById('searchInput');
 // Variable to store the input value
 let searchValue = '';
 
-// Listen for the 'input' event
+//catalog page Listen for the 'input' event  
 searchInput.addEventListener('keyup', (event) => {
+    
     searchValue = event.target.value; 
     fetch(`https://dummyjson.com/products/search?q=${searchValue}`)
         .then(res => res.json())
@@ -71,7 +82,7 @@ searchInput.addEventListener('keyup', (event) => {
 
                         const backButton = document.createElement('button')
                         backButton.textContent = 'Go Back'
-                        backButton.classList.add('.buttons')
+                        backButton.classList.add('buttons')
                         backButton.style.cursor = 'pointer'
     
                                                
@@ -79,14 +90,18 @@ searchInput.addEventListener('keyup', (event) => {
                             
                             sortSection.style.display = "flex"
                             filter.style.display = "flex"
-                                
-                            productsDivCatalog.removeChild(backButton);
+                    
+                            if (productsDivCatalog.contains(backButton)){
+                                productsDivCatalog.removeChild(backButton);
+
+                            }
                             productsDivCatalog.innerHTML = ('')
                             
                             
                             fetch(`https://dummyjson.com/products/category/${product.category}`)
                             .then(res => res.json())
                             .then(category => {
+                                putProducts.innerHTML = '';
                                 productsDivCatalog.innerHTML = ''
                                 createProduct(category, 0, category.length, productsDivCatalog, api=`${category.category}`)
                                 
@@ -109,7 +124,6 @@ searchInput.addEventListener('keyup', (event) => {
             
 })
 });
-
 
 
 

@@ -135,10 +135,12 @@ function createProduct(dataPassed, page, productPerPage, div, api = 'default') {
                                 <div class="text-warning">
                                     ${stars}
                                 </div>
-                                <i class="fa-sharp fa-solid fa-cart-plus section3_cart"></i>
+                                <i class="fa-sharp fa-solid fa-cart-plus section3_cart addToCart"></i>
                             </span> 
                         </article>
                     `);
+                    
+
                     div.appendChild(backButton);
                 });
         }
