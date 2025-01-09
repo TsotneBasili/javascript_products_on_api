@@ -4,10 +4,6 @@
 /////////////////////////////////////////////////////////////
 
 const searchButton = document.getElementById('searchButton');
-// const searchButtonContact = document.getElementById('searchButtonContact');
-// const searchButtonUser = document.getElementById('searchButtonUser');
-
-
 const putProducts = document.getElementById('putProducts');
 const magnifyingGlass = document.getElementById('magnifyingGlass');
 

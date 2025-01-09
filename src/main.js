@@ -62,6 +62,7 @@ function createProduct1(div, product1) {
     const stars = starSOlid.repeat(rating) + starNormal.repeat(5 - rating);
     div.innerHTML = (`
         <article class="catalog_sec_sec2_article">
+            <p class="forId" style="display: none;">${product1.id}</p>
             <img id="imagePost" class="catalog_sec_sec2_article_image" src="${product1.thumbnail}">
             <p class="catalog_sec_sec2_article_p">${product1.title}</p> 
             <span class="catalog_sec_sec2_article_span">
@@ -148,16 +149,12 @@ function createProduct(dataPassed, page, productPerPage, div, api = 'default') {
         });
 
         addToCartButton.addEventListener('click', function addToCartButtonEventListener(event){
-            event.stopPropagation();
+            // event.stopPropagation();
 
-            if (div === productsDivCatalog){
-            const cartDiv = productDiv.cloneNode(true)
-            cartListDiv.appendChild(cartDiv)
-            } else {
-                const cartDivHome = productDiv.cloneNode(true)
-                cartListDivHome.appendChild(cartDivHome)   
-            }
-            
+            let forIdElement = product.id
+            console.log(forIdElement);
+            storedIds.push(forIdElement);  //// aq und agaaketo ro ricxvi moematos ukve damatebuls 
+            localStorage.setItem('productIds', JSON.stringify(storedIds));
         });
 
         addToCartButton.addEventListener('mouseleave', () => {

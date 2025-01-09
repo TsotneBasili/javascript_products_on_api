@@ -43,33 +43,36 @@
             
             <section class="header_section">
 
-                <a href="catalog.html">
+                
                     <button id="searchButtonContact" class="header_button1">
 
-                        <div id="searchDiv">
-                            <form>
-                                <input name="searchInput" class="searchInput" type="search" id="searchInput" placeholder="Type something...">
+                        <div id="searchDivContact">
+                            <form id="formIdContact">
+                                <input name="searchInput" class="searchInput" type="search" id="searchInputContact" placeholder="Type something...">
                             </form>
-                            <div id="putProducts">
+                            <div id="putProductsContact">
             
                             </div>
                         </div>
-                        <i id="magnifyingGlass" class="fa-solid fa-magnifying-glass magnifying_glass_width"></i>
+                        <i id="magnifyingGlassContact" class="fa-solid fa-magnifying-glass magnifying_glass_width"></i>
                     </button>
-                </a>
+                
 
                 <button id="user_button" class="header_button2">
                     <i class="fa-solid fa-user"></i>
                 </button>
 
-                <button id="cart" class="header_button1">
-                    <i class="fa-sharp fa-solid fa-cart-plus header_cart_size"></i>
-                </button>
+                <a href="./cart.html">
+                    <button id="cart" class="header_button1">
+                        <i class="fa-sharp fa-solid fa-cart-plus header_cart_size"></i>
+                    </button>
+                </a>
+
             </section>
         </header>
 
         <!-- form section  -->
-        <section class="background_section">
+        <section id="contactFormSection" class="background_section">
             <section class="main_section">
                 <section class="form_section">
                     <h2 class="form_section_h2">Get  in Touch</h2>
@@ -195,6 +198,8 @@
     <script src="../src/burger.js"></script>
     <script src="../src/search.js"></script>
     <script src="../src/cart.js"></script>
+    <script src="../src/search_contact.js"></script>
+
    
 
 
