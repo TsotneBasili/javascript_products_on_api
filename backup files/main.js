@@ -56,26 +56,33 @@ prevDesc.innerHTML = `
 `;
 
 
+// creating product div
+function createProduct1(div, product1) {
+    const rating = Math.round(product1.rating);
+    const stars = starSOlid.repeat(rating) + starNormal.repeat(5 - rating);
+    div.innerHTML = (`
+        <article class="catalog_sec_sec2_article">
+            <img id="imagePost" class="catalog_sec_sec2_article_image" src="${product1.thumbnail}">
+            <p class="catalog_sec_sec2_article_p">${product1.title}</p> 
+            <span class="catalog_sec_sec2_article_span">
+                <p class="catalog_sec_sec2_article_span_p">${product1.price} $</p>
+                <div class="text-warning">
+                    ${stars}
+                </div>
+                <i class="fa-sharp fa-solid fa-cart-plus section3_cart addToCart"></i>
+            </span> 
+        </article>
+    `);
+}
+
+
 function createProduct(dataPassed, page, productPerPage, div, api = 'default') {
     let cartHovered = false; // Flag to track if the cart is being hovered
 
     dataPassed.products.forEach(product => {
         const productDiv = document.createElement('div');
-        const rating = Math.round(product.rating);
-        const stars = starSOlid.repeat(rating) + starNormal.repeat(5 - rating);
-        productDiv.innerHTML = (`
-            <article class="catalog_sec_sec2_article">
-                <img class="catalog_sec_sec2_article_image" src="${product.thumbnail}">
-                <p class="catalog_sec_sec2_article_p">${product.title}</p> 
-                <span class="catalog_sec_sec2_article_span">
-                    <p class="catalog_sec_sec2_article_span_p">${product.price} $</p>
-                    <div class="text-warning">
-                        ${stars}
-                    </div>
-                    <i class="fa-sharp fa-solid fa-cart-plus section3_cart addToCart"></i>
-                </span> 
-            </article>
-        `);
+
+        createProduct1(productDiv, product)
 
         function productDiveventListener(event) {
             if (cartHovered) return; // If cart is hovered, block interaction
@@ -104,8 +111,8 @@ function createProduct(dataPassed, page, productPerPage, div, api = 'default') {
                             fetch(`https://dummyjson.com/products/category/${product.category}`)
                                 .then(res => res.json())
                                 .then(category => {
-                                    productsDivCatalog.innerHTML = '';
-                                    createProduct(category, 0, category.length, productsDivCatalog, api = `${category.category}`);
+                                    div.innerHTML = '';
+                                    createProduct(category, 0, category.length, div, api = `${category.category}`);
                                 });
                         });
                     } else {
@@ -126,20 +133,7 @@ function createProduct(dataPassed, page, productPerPage, div, api = 'default') {
                         });
                     }
 
-                    div.innerHTML = (`
-                        <article class="catalog_sec_sec2_article">
-                            <img id="imagePost" class="catalog_sec_sec2_article_image" src="${product.thumbnail}">
-                            <p class="catalog_sec_sec2_article_p">${product.title}</p> 
-                            <span class="catalog_sec_sec2_article_span">
-                                <p class="catalog_sec_sec2_article_span_p">${product.price} $</p>
-                                <div class="text-warning">
-                                    ${stars}
-                                </div>
-                                <i class="fa-sharp fa-solid fa-cart-plus section3_cart addToCart"></i>
-                            </span> 
-                        </article>
-                    `);
-                    
+                    createProduct1(div, product)
 
                     div.appendChild(backButton);
                 });
@@ -195,28 +189,6 @@ function fetchFunction(page, productPerPage, div, api='default') {
 
                     createProduct(data, page, productPerPage, div, api)
 
-                    //DONT DELETE IN CASE YOU WANT TO REMAKE POPULA PAGE IN NEXT PREVIOUSE BUTTON PAGE AGAIN INSTEAD OF LOAD PAGE
-                    //next-prev buttons
-                    //previous
-                    // if (page != 0) {
-                    //     prevButtonSection.appendChild(previous)
-
-                    // } else if (page === 0) {
-                    //     prevButtonSection.removeChild(previous)
-
-                    // }
-
-                    // function handlePreviousClick() {
-                    //     page -= 1;
-                    //     prevButtonSection.removeChild(previous);
-                    //     pageCount.textContent = `Page ${page + 1} of ${totalPages}`;
-                    //     div.innerHTML = ``;
-                    //     fetchFunction(page, productPerPage, div);
-                    // }
-
-                    // previous.addEventListener('click', handlePreviousClick);
-                    //previous
-
                     //next for load
                     if (page === Math.ceil(data.total / productPerPage)) {
                         buttonSection.removeChild(next)
@@ -233,7 +205,6 @@ function fetchFunction(page, productPerPage, div, api='default') {
                     }
 
                     next.addEventListener('click', handleNextClick);
-                    //nextprev buttons
 
 
                     //sorting

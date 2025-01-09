@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/reset.css">
+    <script src="https://kit.fontawesome.com/4246e4d6fd.js" crossorigin="anonymous"></script>
+    
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/laptop1439-769.css">
+    <link rel="stylesheet" href="../css/tablet768-481.css">
+    <link rel="stylesheet" href="../css/mobile480-320.css">
+    <link rel="icon" href="../images/home_images/wpf_guitar.svg">
+
+    <title>Catalog</title>
+</head>
+<body>
+    <div class="container">
+        <!-- /* header  */ -->
+        <header class="header">
+
+            <i class="fa-solid fa-xmark header_x_mark"></i>
+
+            <i class="fa-solid fa-bars header_hamburger"></i>
+
+            <nav class="header_nav">
+                <ul class="header_nav_ul">
+                    <li>
+                        <a href="index.html" class="header_nav_ul_li_a ">Home</a>
+                    </li>
+                    <li>
+                        <a href="catalog.html" class="header_nav_ul_li_a header_active_color">Catalog</a>
+                    </li>
+                    <li>
+                        <a href="contact.html" class="header_nav_ul_li_a">Contact Us</a>
+                    </li>
+                </ul>
+            </nav>
+
+            <a href="index.html">
+                <img src="../images/home_images/wpf_guitar.svg" alt="" class="logo">
+            </a>
+
+            
+            <section class="header_section">
+
+                <button id="searchButton" class="header_button1">
+
+                    <div id="searchDiv">
+                        <form id="formId">
+                            <input class="searchInput" type="search" id="searchInput" placeholder="Type something...">
+                        </form>
+                        <ul id="putProducts">
+                        </ul>
+                    </div>
+                    <i id="magnifyingGlass" class="fa-solid fa-magnifying-glass magnifying_glass_width"></i>
+                </button>
+
+                <button id="user_button" class="header_button2">
+                    <i class="fa-solid fa-user"></i>
+                </button>
+
+                <button id="cart" class="header_button1">
+                    <i class="fa-sharp fa-solid fa-cart-plus header_cart_size"></i>
+                </button>
+            </section>
+
+        </header>
+
+        <!-- <p></p> -->
+        <!-- catalog_section  -->
+        <section class="catalog_section">
+            <section class="catalog_sec_sec1">
+                <section id="filter" class="catalog_sec_sec1_sec1">
+                    <h2 class="catalog_sec_h2">Filter</h2>
+                    <button class="catalog_sec_button1">
+                        <img id="filter_image" src="../images/catalog_images/Vector.svg" alt="">
+                    </button>
+                </section>
+                <section id="sort_by" class="catalog_sec_sec1_sec2">
+                    <h2 class="catalog_sec_h2">Sort by:</h2>
+                    <button  type="menu" class="catalog_sec_button2">
+                        <span id="sortByPopular" class="catalog_span">Best selling</span>
+                        <img id="arrowDown" src="../images/catalog_images/solar_alt-arrow-down-outline.svg" alt="">
+                    </button>
+                </section>
+            </section>
+                
+            <section class="catalog_sec_sec2">
+                
+            </section>
+
+            <section id="buttonSection" class="catalog_sec_sec3">
+                <div id="prevButtonSection">
+                    <!-- <button id="previousButton" class="catalog_sec_sec3_button1">
+                        <img src="images/catalog_images/iconamoon_arrow-left-2-duotone.svg" alt="">
+                        <span class = "catalog_next_prev_none">Load Less</span>
+                    </button> -->
+                </div>
+                <h3 id="pageCount" class="catalog_sec_sec3_h3"></h3>
+                <button id="nextButton" class="catalog_sec_sec3_button2">
+                    <span class = "catalog_next_prev_none">Load</span>
+                    <img id="load_arrow_image" src="../images/catalog_images/iconamoon_arrow-right-2-duotone.svg" alt="">
+                </button>
+
+            </section>
+
+        </section>
+
+
+        <!-- footer  -->
+        <footer class="footer">
+            <section>
+                <h5 class="footer_h4">Brands</h5>
+                <nav>
+                    <ul class="footer_nav_ul">
+                        <li>
+                            <a href="" class="footer_nav_a">Fender</a>
+                        </li>
+                        <li>
+                            <a href="" class="footer_nav_a">Gibson</a>
+                        </li>
+                        <li>
+                            <a href="" class="footer_nav_a">Jockson</a>
+                        </li>
+                        <li>
+                            <a href="" class="footer_nav_a">Ibanez</a>
+                        </li>
+                    </ul>
+                </nav>
+            </section>
+            <section>
+                <h5 class="footer_h4">Information</h5>
+                <nav>
+                    <ul class="footer_nav_ul">
+                        <li>
+                            <a href="" class="footer_nav_a">Blog</a>
+                        </li>
+                        <li>
+                            <a href="" class="footer_nav_a">Delivery</a>
+                        </li>
+                        <li>
+                            <a href="" class="footer_nav_a">About us</a>
+                        </li>
+                    </ul>
+                </nav>
+            </section>
+            
+            <section>
+                <h5 class="footer_h4">Contact</h5>
+                <nav>
+                    <ul class="footer_nav_ul">
+                        <li>
+                            <a href="https://maps.app.goo.gl/wKjYsmrFWqZ7gAoWA" class="footer_nav_a" target="_blank">Tbilisi, str, Rustaveli 24</a>
+                        </li>
+                        <li>
+                            <a href="tel:+322567898" class="footer_nav_a">+(32)2 56 78 98</a>
+                        </li>
+                        <section class="footer_section_social">
+                            <a href="https://www.facebook.com/" class="social_link" target="_blank">
+                                <i class="fa-brands fa-facebook-f"></i>
+                            </a>
+                            <a href="https://www.whatsapp.com/" class="social_link" target="_blank">
+                                <i class="fa-brands fa-whatsapp"></i>
+                            </a>
+                            <a href="https://www.instagram.com/" class="social_link_inst" target="_blank">
+                                <img src="../images/home_images/basil_instagram-solid.svg" alt="">
+                            </a>
+                        </section>
+                    </ul>
+                </nav>
+            </section>
+        </footer>
+    </div>
+    
+    <!-- <script src="main.js"></script>
+    <script src="sign_in.js"></script>
+    <script src="burger.js"></script>
+    <script src="filter.js"></script>
+    <script src="./search.js"></script>
+    <script src="./cart.js"></script> -->
+
+    
+    <script src="../src/main.js"></script>
+    <script src="../src/sign_in.js"></script>
+    <script src="../src/burger.js"></script>
+    <script src="../src/filter.js"></script>
+    <script src="../src/search.js"></script>
+    <script src="../src/cart.js"></script>
+</body>
+
+
+</body>
+</html>
