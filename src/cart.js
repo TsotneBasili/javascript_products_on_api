@@ -45,24 +45,35 @@ storedIds.forEach(idSingle => {
                               <div class="text-warning">
                                   ${stars}
                               </div>
-                              
+                              <i class="fa-sharp fa-solid fa-cart-plus section3_cart addToCart"></i>
                           </span> 
                       </article>
                     `); 
+
+
+                    const addToCartButton1 = cartItem.querySelector('.addToCart');
+                    addToCartButton1.addEventListener('click', function addToCartButtonEventListener(event){
+                        event.stopPropagation();
+            
+                        let forIdElement = product.id
+                        console.log(forIdElement);
+                        storedIds.push(forIdElement);  
+                        localStorage.setItem('productIds', JSON.stringify(storedIds));
+                        numberCartItem ++
+                        updateCartNumber()
+                    });
+
 
                     const deleteButton = document.createElement('button')
                     deleteButton.addEventListener('click', () => {
                         storedIds = storedIds.filter((id) => id !== idSingle);
                         localStorage.setItem('productIds', JSON.stringify(storedIds));
 
-                          // Remove the item from the DOM
+                        // Remove the item from the DOM
                         cartItem.remove();
-
-                        // let cartItemsNumberP2 = document.querySelector('.cartItemsNumber')
 
                         numberCartItem --
                         updateCartNumber()
-                    // updateCartNumber()
                     })
 
                     deleteButton.style.width = '100%'
