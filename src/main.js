@@ -139,6 +139,8 @@ function createProduct(dataPassed, page, productPerPage, div, api = 'default') {
                         console.log(forIdElement);
                         storedIds.push(forIdElement);  //// aq und agaaketo ro ricxvi moematos ukve damatebuls 
                         localStorage.setItem('productIds', JSON.stringify(storedIds));
+                        numberCartItem ++
+                        updateCartNumber()
                     });
 
                     div.appendChild(backButton);
@@ -160,6 +162,8 @@ function createProduct(dataPassed, page, productPerPage, div, api = 'default') {
             console.log(forIdElement);
             storedIds.push(forIdElement);  //// aq und agaaketo ro ricxvi moematos ukve damatebuls 
             localStorage.setItem('productIds', JSON.stringify(storedIds));
+            numberCartItem ++
+            updateCartNumber()
         });
 
         addToCartButton.addEventListener('mouseleave', () => {
@@ -500,3 +504,4 @@ catalogSecButton2.addEventListener('click', handleCatalogClick);
 
 
 
+//cart item number

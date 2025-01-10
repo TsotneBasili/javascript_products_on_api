@@ -81,9 +81,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    column-gap: 5px;
+    /* column-gap: 5px; */
+    padding: 1px;
 
-    width: 40px;
+    width: 50px;
     /* width: min(40px, 80px); */
     height: 40px;
     background-color: transparent;
@@ -94,6 +95,10 @@
     cursor: pointer;
     
     transition: 0.3s;
+}
+
+.cartItemsNumber {
+    color: gold;
 }
 
 .searchInput {

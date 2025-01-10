@@ -9,6 +9,24 @@ cartListDiv.style.gap = '15px 16px'
 
 let storedIds = JSON.parse(localStorage.getItem('productIds')) || [];
 
+// cart item count 
+let storedIds2 = JSON.parse(localStorage.getItem('productIds')) || [];
+
+let cartItemsNumberP = document.querySelector('.cartItemsNumber')
+
+let cartItemsNumberCount = storedIds2.length
+let numberCartItem = storedIds2.length
+
+function updateCartNumber() {
+    if (numberCartItem < 1){
+        cartItemsNumberP.textContent = 0
+    } else {
+        cartItemsNumberP.textContent = `+ ${numberCartItem}`
+    }
+}
+
+updateCartNumber()
+
 storedIds.forEach(idSingle => {
   // console.log(id)
   fetch(`https://dummyjson.com/products/${idSingle}`)
@@ -34,11 +52,17 @@ storedIds.forEach(idSingle => {
 
                     const deleteButton = document.createElement('button')
                     deleteButton.addEventListener('click', () => {
-                      storedIds = storedIds.filter((id) => id !== idSingle);
-                      localStorage.setItem('productIds', JSON.stringify(storedIds));
+                        storedIds = storedIds.filter((id) => id !== idSingle);
+                        localStorage.setItem('productIds', JSON.stringify(storedIds));
 
                           // Remove the item from the DOM
-                          cartItem.remove();
+                        cartItem.remove();
+
+                        // let cartItemsNumberP2 = document.querySelector('.cartItemsNumber')
+
+                        numberCartItem --
+                        updateCartNumber()
+                    // updateCartNumber()
                     })
 
                     deleteButton.style.width = '100%'
@@ -86,7 +110,7 @@ cartCatalog.appendChild(backButtonCatalog);
 
 
 
-//Cart page event listener/////////////////////////////////////////////////////////////////////////////
+//Cart search button event listener/////////////////////////////////////////////////////////////////////////////
 const searchButtonCart = document.getElementById('searchButtonCart');
 const putProductsCart = document.getElementById('putProductsCart');
 const magnifyingGlassCart = document.getElementById('magnifyingGlassCart');
@@ -195,7 +219,9 @@ searchInputCart.addEventListener('keyup', (event) => {
 });
 
 
+////cart count
 
-  
+
+  cartItemsNumber111.textContent = (`<p>asdasdasdasd</p>`)
 
 
