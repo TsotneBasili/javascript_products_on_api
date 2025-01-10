@@ -26,14 +26,14 @@ nextAsc.id ='nextAsc'
 nextAsc.classList.add('catalog_sec_sec3_button2')
 nextAsc.innerHTML = `
     <span class = "catalog_next_prev_none">Next</span>
-    <img src="images/catalog_images/iconamoon_arrow-right-2-duotone.svg" alt="">
+    <img src="../images/catalog_images/iconamoon_arrow-right-2-duotone.svg" alt="">
 `;
 
 const prevAsc = document.createElement('button')
 prevAsc.id ='prevAsc'
 prevAsc.classList.add('catalog_sec_sec3_button1')
 prevAsc.innerHTML = `
-    <img src="images/catalog_images/iconamoon_arrow-left-2-duotone.svg" alt="">
+    <img src="../images/catalog_images/iconamoon_arrow-left-2-duotone.svg" alt="">
     <span class = "catalog_next_prev_none">Previous</span>
 `;
 
@@ -44,14 +44,14 @@ nextDesc.id ='nextDesc'
 nextDesc.classList.add('catalog_sec_sec3_button2')
 nextDesc.innerHTML = `
     <span class = "catalog_next_prev_none">Next</span>
-    <img src="images/catalog_images/iconamoon_arrow-right-2-duotone.svg" alt="">
+    <img src="../images/catalog_images/iconamoon_arrow-right-2-duotone.svg" alt="">
 `;
 
 const prevDesc = document.createElement('button')
 prevDesc.id ='prevDesc'
 prevDesc.classList.add('catalog_sec_sec3_button1')
 prevDesc.innerHTML = `
-    <img src="images/catalog_images/iconamoon_arrow-left-2-duotone.svg" alt="">
+    <img src="../images/catalog_images/iconamoon_arrow-left-2-duotone.svg" alt="">
     <span class = "catalog_next_prev_none">Previous</span>
 `;
 
@@ -238,9 +238,9 @@ function fetchFunction(page, productPerPage, div, api='default') {
                         ascPage = 0
                         //prev_next asc buttons
                         //prev
-                        if (prevButtonSection.contains(previous)) {
-                            prevButtonSection.removeChild(previous);
-                        }
+                        // if (prevButtonSection.contains(previous)) {
+                        //     prevButtonSection.removeChild(previous);
+                        // }
                         if (prevButtonSection.contains(prevDesc)) {
                             prevButtonSection.removeChild(prevDesc);
                         }
@@ -298,9 +298,9 @@ function fetchFunction(page, productPerPage, div, api='default') {
 
                         descPage = 0
                         //prev_next asc buttons
-                        if (prevButtonSection.contains(previous)) {
-                            prevButtonSection.removeChild(previous);
-                        }
+                        // if (prevButtonSection.contains(previous)) {
+                        //     prevButtonSection.removeChild(previous);
+                        // }
 
                         if (prevButtonSection.contains(prevAsc)) {
                             prevButtonSection.removeChild(prevAsc);
