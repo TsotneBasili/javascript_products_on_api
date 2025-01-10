@@ -14,10 +14,6 @@ const prevButtonSection = document.querySelector('#prevButtonSection')
 
 //popular
 const next = document.querySelector('#nextButton')
-let loadArrowImage = document.querySelector('#load_arrow_image')
-// loadArrowImage.style.transform = 'rotate(90deg)';
-const previous = document.querySelector('#previousButton')
-// display none maqvs styleshi previousze tu agdgena daapire iq shecvale flex da catalog htmlshic uncoment gaukete
 
 
 // asc button
@@ -145,7 +141,6 @@ function createProduct(dataPassed, page, productPerPage, div, api = 'default') {
                         localStorage.setItem('productIds', JSON.stringify(storedIds));
                     });
 
-                    // div.appendChild(addToCartButton);
                     div.appendChild(backButton);
                 });
         }
@@ -207,7 +202,6 @@ function fetchFunction(page, productPerPage, div, api='default') {
                         page += 1;
                         buttonSection.removeChild(next);
                         pageCount.textContent = `Page ${page + 1} of ${totalPages}`;
-                        // div.innerHTML = ``;  if you want to make it next button uncomment this and previouse button above and display none in buttons above
                         fetchFunction(page, productPerPage, div, "popular");
                     }
 
@@ -236,11 +230,7 @@ function fetchFunction(page, productPerPage, div, api='default') {
                         catalogSecButton2.removeChild(sortByPopular);
 
                         ascPage = 0
-                        //prev_next asc buttons
-                        //prev
-                        // if (prevButtonSection.contains(previous)) {
-                        //     prevButtonSection.removeChild(previous);
-                        // }
+                        
                         if (prevButtonSection.contains(prevDesc)) {
                             prevButtonSection.removeChild(prevDesc);
                         }
@@ -297,10 +287,6 @@ function fetchFunction(page, productPerPage, div, api='default') {
                         catalogSecButton2.removeChild(sortByPopular);
 
                         descPage = 0
-                        //prev_next asc buttons
-                        // if (prevButtonSection.contains(previous)) {
-                        //     prevButtonSection.removeChild(previous);
-                        // }
 
                         if (prevButtonSection.contains(prevAsc)) {
                             prevButtonSection.removeChild(prevAsc);

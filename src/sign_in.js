@@ -38,7 +38,6 @@ function errorMassage(element, massage) {
 
     form.classList.add('not-validated')
 
-
     // Remove any existing error messages
     const existingError = element.parentElement.querySelector('.invalid-feedback');
     if (existingError) {
@@ -119,18 +118,9 @@ function searchButtonSignInListener(event) {
 
 magnifyingGlassSignIn.addEventListener('click', searchButtonSignInListener)
 
-
-
 const searchInputSignIn = document.getElementById('searchInputSignIn');
 
-
-
-
-
 let searchValueSignIn = '';
-
-
-
 
 searchInputSignIn.addEventListener('keyup', (event) => {
     

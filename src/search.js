@@ -1,7 +1,4 @@
-
-
-
-/////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////
 
 const searchButton = document.getElementById('searchButton');
 const putProducts = document.getElementById('putProducts');
@@ -115,10 +112,8 @@ searchInput.addEventListener('keyup', (event) => {
                     }
                 }
                 
-            });
-
-            
-})
+            });            
+        })
 });
 
 

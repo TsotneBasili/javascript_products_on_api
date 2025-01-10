@@ -25,18 +25,9 @@ function searchButtonHomeListener(event) {
 
 magnifyingGlassHome.addEventListener('click', searchButtonHomeListener)
 
-
-
 const searchInputHome = document.getElementById('searchInputHome');
 
-
-
-
-
 let searchValueHome = '';
-
-
-
 
 searchInputHome.addEventListener('keyup', (event) => {
     
