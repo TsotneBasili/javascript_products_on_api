@@ -45,7 +45,7 @@ storedIds.forEach(idSingle => {
                               <div class="text-warning">
                                   ${stars}
                               </div>
-                              <i class="fa-sharp fa-solid fa-cart-plus section3_cart addToCart"></i>
+                              
                           </span> 
                       </article>
                     `); 
