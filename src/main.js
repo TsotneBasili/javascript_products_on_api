@@ -135,7 +135,17 @@ function createProduct(dataPassed, page, productPerPage, div, api = 'default') {
                     }
 
                     createProduct1(div, product)
+                    const addToCartButton = div.querySelector('.addToCart');
+                    addToCartButton.addEventListener('click', function addToCartButtonEventListener(event){
+                        // event.stopPropagation();
+            
+                        let forIdElement = product.id
+                        console.log(forIdElement);
+                        storedIds.push(forIdElement);  //// aq und agaaketo ro ricxvi moematos ukve damatebuls 
+                        localStorage.setItem('productIds', JSON.stringify(storedIds));
+                    });
 
+                    // div.appendChild(addToCartButton);
                     div.appendChild(backButton);
                 });
         }
