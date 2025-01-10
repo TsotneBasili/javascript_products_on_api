@@ -936,7 +936,7 @@
 
 
 
-#formId {
+/* #formId {
     position: relative;
 
 }
@@ -950,6 +950,16 @@
     position: relative;
 
 }
+
+#formIdSignIn {
+    position: relative;
+
+}
+
+#formIdCart {
+    position: relative;
+
+} */
 
 #putProducts {
     display: flex;
@@ -988,6 +998,42 @@
 }
 
 #putProductsContact {
+    display: flex;
+    flex-direction: column;
+
+    position: absolute;
+    z-index: 1;
+
+    top: 50px;
+
+    background-color: #023038;
+    font-family: "Inter", serif;
+
+    /* overflow-y: scroll;
+    height: 100px;
+    scrollbar-width: thin; 
+    scrollbar-color: #35a4b8 #023038; */
+}
+
+#putProductsSignIn {
+    display: flex;
+    flex-direction: column;
+
+    position: absolute;
+    z-index: 1;
+
+    top: 50px;
+
+    background-color: #023038;
+    font-family: "Inter", serif;
+
+    /* overflow-y: scroll;
+    height: 100px;
+    scrollbar-width: thin; 
+    scrollbar-color: #35a4b8 #023038; */
+}
+
+#putProductsCart {
     display: flex;
     flex-direction: column;
 

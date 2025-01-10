@@ -87,3 +87,117 @@ form.addEventListener('submit', (event) => {
     errorMassage(form.email, "please check credentials")
     errorMassage(form.password, "please check credentials")
 });
+
+
+
+
+//SignIn page event listener/////////////////////////////////////////////////////////////////////////////
+const searchButtonSignIn = document.getElementById('searchButtonSignIn');
+const putProductsSignIn = document.getElementById('putProductsSignIn');
+const sign_in_form_sec = document.getElementById('sign_in_form');
+const magnifyingGlassSignIn = document.getElementById('magnifyingGlassSignIn');
+
+
+const searchDivSignIn = document.getElementById('searchDivSignIn');
+searchDivSignIn.style.display = 'none'
+
+let searchButtonCountSignIn = 0
+function searchButtonSignInListener(event) {
+    event.stopPropagation()
+    searchButtonCountSignIn += 1
+
+    if (searchButtonCountSignIn % 2 === 1) {
+        searchDivSignIn.style.display = 'flex'
+        searchButtonSignIn.style.width = '200px'
+
+    }else {
+    searchDivSignIn.style.display = 'none'
+    searchButtonSignIn.style.width = '40px'
+    }
+
+}
+
+magnifyingGlassSignIn.addEventListener('click', searchButtonSignInListener)
+
+
+
+const searchInputSignIn = document.getElementById('searchInputSignIn');
+
+
+
+
+
+let searchValueSignIn = '';
+
+
+
+
+searchInputSignIn.addEventListener('keyup', (event) => {
+    
+    searchValueSignIn = event.target.value; 
+    fetch(`https://dummyjson.com/products/search?q=${searchValueSignIn}`)
+        .then(res => res.json())
+        .then(data => {
+            putProductsSignIn.innerHTML = '';
+            // console.log(data); 
+            let productCountSignIn = 0
+            data.products.forEach(product => {
+                productCountSignIn +=1
+                if (productCountSignIn < 11){
+                    const liProduct = document.createElement('button'); 
+                    liProduct.textContent = `${product.title}`;
+                    putProductsSignIn.appendChild(liProduct); 
+
+                    liProduct.addEventListener('click', () => {
+                        
+
+                        const rating = Math.round(product.rating)
+                        const stars = starSOlid.repeat(rating) + starNormal.repeat(5 - rating)
+
+                        sign_in_form_sec.innerHTML = (`
+                            <article class="catalog_sec_sec2_article">
+                                <img class="catalog_sec_sec2_article_image" src="${product.thumbnail}">
+                                <p class="catalog_sec_sec2_article_p">${product.title}</p> 
+                                <span class="catalog_sec_sec2_article_span">
+                                    <p class="catalog_sec_sec2_article_span_p">${product.price} $</p>
+                                    <div class="text-warning">
+                                        ${stars}
+                                    </div>
+                                    <i class="fa-sharp fa-solid fa-cart-plus section3_cart"></i>
+                                </span> 
+                            </article>
+                        `);
+
+                        // sign_in_form_sec.style.width = '400px'
+
+                        const backButton = document.createElement('button')
+                        backButton.textContent = 'Go Back'
+                        backButton.classList.add('buttons')
+                        backButton.style.cursor = 'pointer'
+    
+                                               
+                        backButton.addEventListener("click", () => {
+                            
+                            window.location.href = '../html/sign_in.html'
+                            
+                           
+
+                        })
+                        sign_in_form_sec.appendChild(backButton);
+                        
+
+                    })
+
+                    if (searchValueSignIn === ""){
+                        putProductsSignIn.innerHTML = '';
+        
+                    }
+                }
+                
+            });
+
+            
+})
+});
+
+

@@ -23,7 +23,7 @@
             <nav class="header_nav">
                 <ul class="header_nav_ul">
                     <li>
-                        <a href="../index.html" class="header_nav_ul_li_a header_active_color">Home</a>
+                        <a href="../index.html" class="header_nav_ul_li_a">Home</a>
                     </li>
                     <li>
                         <a href="catalog.html" class="header_nav_ul_li_a">Catalog</a>
@@ -39,20 +39,20 @@
             </a>
 
             <section class="header_section">
-                <!-- <a href="catalog.html"> -->
-                    <button id="searchButtonUser" class="header_button1">
 
-                        <div id="searchDiv">
-                            <form>
-                                <input name="searchInput" class="searchInput" type="search" id="searchInput" placeholder="Type something...">
-                            </form>
-                            <div id="putProducts">
-            
-                            </div>
+                <button id="searchButtonSignIn" class="header_button1">
+
+                    <div id="searchDivSignIn">
+                        <form id="formIdSignIn">
+                            <input name="searchInput" class="searchInput" type="search" id="searchInputSignIn" placeholder="Type something...">
+                        </form>
+                        <div id="putProductsSignIn">
+        
                         </div>
-                        <i id="magnifyingGlass" class="fa-solid fa-magnifying-glass magnifying_glass_width"></i>
-                    </button>
-                <!-- </a> -->
+                    </div>
+                    <i id="magnifyingGlassSignIn" class="fa-solid fa-magnifying-glass magnifying_glass_width"></i>
+                </button>
+                
 
                 <button id="user_button" class="header_button2">
                     <i class="fa-solid fa-user"></i>
@@ -68,7 +68,7 @@
 
         </header>
 
-        <section class="sign_in_form_sec">
+        <section id="sign_in_form_sec" class="sign_in_form_sec">
             <form id="sign_in_form" method="post" class="sign_in_form">
                 <div class="email_div">
                     <label for="exampleInputEmail1" class="form-label">Email address</label>
