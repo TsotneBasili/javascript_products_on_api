@@ -191,8 +191,6 @@ function fetchFunction(page, productPerPage, div, api='default') {
                     const totalPages = Math.ceil(data.total / productPerPage)
                     pageCount.style.display = 'none'
 
-                    pageCount.textContent = `Page ${page + 1} of ${totalPages}`;
-
                     createProduct(data, page, productPerPage, div, api)
 
                     //next for load
@@ -205,7 +203,6 @@ function fetchFunction(page, productPerPage, div, api='default') {
                     function handleNextClick() {
                         page += 1;
                         buttonSection.removeChild(next);
-                        pageCount.textContent = `Page ${page + 1} of ${totalPages}`;
                         fetchFunction(page, productPerPage, div, "popular");
                     }
 
@@ -273,7 +270,7 @@ function fetchFunction(page, productPerPage, div, api='default') {
                         }
                         nextAsc.addEventListener('click', nextAscEventListener)
 
-                        sortOptionAsc.addEventListener('click', sortOptionAscEventListener)
+                        // sortOptionAsc.addEventListener('click', sortOptionAscEventListener)
 
                         fetchFunction(ascPage, productPerPageCatalogAsc, productsDivCatalog, 'asc')     
 
@@ -331,7 +328,7 @@ function fetchFunction(page, productPerPage, div, api='default') {
                         }
                         nextDesc.addEventListener('click', nextDescEventListener)
 
-                        sortOptionDesc.addEventListener('click', sortOptionDescEventListener)
+                        // sortOptionDesc.addEventListener('click', sortOptionDescEventListener)
 
                         fetchFunction(descPage, productPerPageCatalogDesc, productsDivCatalog, 'desc') 
 

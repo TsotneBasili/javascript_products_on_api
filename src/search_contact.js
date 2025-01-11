@@ -68,10 +68,21 @@ searchInputContact.addEventListener('keyup', (event) => {
                                     <div class="text-warning">
                                         ${stars}
                                     </div>
-                                    <i class="fa-sharp fa-solid fa-cart-plus section3_cart"></i>
+                                    <i class="fa-sharp fa-solid fa-cart-plus section3_cart addToCart"></i>
                                 </span> 
                             </article>
                         `);
+                        const addToCartButton = contactFormSection.querySelector('.addToCart');
+                        addToCartButton.addEventListener('click', function addToCartButtonEventListener(event){
+                            // event.stopPropagation();
+                
+                            let forIdElement = product.id
+                            console.log(forIdElement);
+                            storedIds.push(forIdElement);  //// aq und agaaketo ro ricxvi moematos ukve damatebuls 
+                            localStorage.setItem('productIds', JSON.stringify(storedIds));
+                            numberCartItem ++
+                            updateCartNumber()
+                        });
 
                         const backButton = document.createElement('button')
                         backButton.textContent = 'Go Back'

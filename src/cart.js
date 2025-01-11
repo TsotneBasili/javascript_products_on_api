@@ -51,6 +51,7 @@ storedIds.forEach(idSingle => {
                     `); 
 
 
+                    //damushaveba unda cartshi damatebuls ro vamateb kide shignit cartshive mere ertis washlisas meoresac shlis
                     const addToCartButton1 = cartItem.querySelector('.addToCart');
                     addToCartButton1.addEventListener('click', function addToCartButtonEventListener(event){
                         event.stopPropagation();
@@ -192,10 +193,22 @@ searchInputCart.addEventListener('keyup', (event) => {
                                     <div class="text-warning">
                                         ${stars}
                                     </div>
-                                    <i class="fa-sharp fa-solid fa-cart-plus section3_cart"></i>
+                                    <i class="fa-sharp fa-solid fa-cart-plus section3_cart addToCart"></i>
                                 </span> 
                             </article>
                         `);
+
+                        const addToCartButton = cartCatalog.querySelector('.addToCart');
+                        addToCartButton.addEventListener('click', function addToCartButtonEventListener(event){
+                            // event.stopPropagation();
+                
+                            let forIdElement = product.id
+                            console.log(forIdElement);
+                            storedIds.push(forIdElement);  //// aq und agaaketo ro ricxvi moematos ukve damatebuls 
+                            localStorage.setItem('productIds', JSON.stringify(storedIds));
+                            numberCartItem ++
+                            updateCartNumber()
+                        });
 
                         // sign_in_form_sec.style.width = '400px'
 

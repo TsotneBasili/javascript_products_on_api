@@ -153,12 +153,22 @@ searchInputSignIn.addEventListener('keyup', (event) => {
                                     <div class="text-warning">
                                         ${stars}
                                     </div>
-                                    <i class="fa-sharp fa-solid fa-cart-plus section3_cart"></i>
+                                    <i class="fa-sharp fa-solid fa-cart-plus section3_cart addToCart"></i>
                                 </span> 
                             </article>
                         `);
 
-                        // sign_in_form_sec.style.width = '400px'
+                        const addToCartButton1 = sign_in_form_sec.querySelector('.addToCart');
+                        addToCartButton1.addEventListener('click', function addToCartButtonEventListener(event){
+                            event.stopPropagation();
+                
+                            let forIdElement = product.id
+                            console.log(forIdElement);
+                            storedIds.push(forIdElement);  
+                            localStorage.setItem('productIds', JSON.stringify(storedIds));
+                            numberCartItem ++
+                            updateCartNumber()
+                        });
 
                         const backButton = document.createElement('button')
                         backButton.textContent = 'Go Back'
