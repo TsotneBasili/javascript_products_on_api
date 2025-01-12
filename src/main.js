@@ -1,3 +1,5 @@
+// localStorage.clear();
+
 const starSOlid = `<i class="fa-solid fa-star"></i>`;
 const starNormal = `<i class="fa-regular fa-star"></i>`;
 

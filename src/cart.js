@@ -10,12 +10,12 @@ cartListDiv.style.gap = '15px 16px'
 let storedIds = JSON.parse(localStorage.getItem('productIds')) || [];
 
 // cart item count 
-let storedIds2 = JSON.parse(localStorage.getItem('productIds')) || [];
+// let storedIds2 = JSON.parse(localStorage.getItem('productIds')) || [];
 
 let cartItemsNumberP = document.querySelector('.cartItemsNumber')
 
-let cartItemsNumberCount = storedIds2.length
-let numberCartItem = storedIds2.length
+let cartItemsNumberCount = storedIds.length
+let numberCartItem = storedIds.length
 
 function updateCartNumber() {
     if (numberCartItem < 1){
@@ -67,7 +67,8 @@ storedIds.forEach(idSingle => {
 
                     const deleteButton = document.createElement('button')
                     deleteButton.addEventListener('click', () => {
-                        storedIds = storedIds.filter((id) => id !== idSingle);
+                        storedIds = storedIds.slice(0, storedIds.indexOf(idSingle))
+                        .concat(storedIds.slice(storedIds.indexOf(idSingle) + 1));
                         localStorage.setItem('productIds', JSON.stringify(storedIds));
 
                         // Remove the item from the DOM
