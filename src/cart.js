@@ -1,3 +1,6 @@
+// localStorage.clear();
+
+
 const cartCatalog = document.querySelector('#cartCatalog')
 const cart = document.querySelector('#cart')
 const cartListDiv = document.createElement('div')
@@ -27,93 +30,94 @@ function updateCartNumber() {
 
 updateCartNumber()
 
-storedIds.forEach(idSingle => {
-  // console.log(id)
-  fetch(`https://dummyjson.com/products/${idSingle}`)
-                .then(response => response.json())
-                .then((product) =>{
-                    const cartItem = document.createElement('div'); // Create an element for each saved item
-
-                    const rating = Math.round(product.rating);
-                    const stars = starSOlid.repeat(rating) + starNormal.repeat(5 - rating);
-                    cartItem.innerHTML = (`
-                      <article class="catalog_sec_sec2_article">
-                          <img id="imagePost" class="catalog_sec_sec2_article_image" src="${product.thumbnail}">
-                          <p class="catalog_sec_sec2_article_p">${product.title}</p> 
-                          <span class="catalog_sec_sec2_article_span">
-                              <p class="catalog_sec_sec2_article_span_p">${product.price} $</p>
-                              <div class="text-warning">
-                                  ${stars}
-                              </div>
-                              <i class="fa-sharp fa-solid fa-cart-plus section3_cart addToCart"></i>
-                          </span> 
-                      </article>
-                    `); 
-
-
-                    //damushaveba unda cartshi damatebuls ro vamateb kide shignit cartshive mere ertis washlisas meoresac shlis
-                    const addToCartButton1 = cartItem.querySelector('.addToCart');
-                    addToCartButton1.addEventListener('click', function addToCartButtonEventListener(event){
-                        event.stopPropagation();
-            
-                        let forIdElement = product.id
-                        console.log(forIdElement);
-                        storedIds.push(forIdElement);  
-                        localStorage.setItem('productIds', JSON.stringify(storedIds));
-                        numberCartItem ++
-                        updateCartNumber()
-                    });
-
-
-                    const deleteButton = document.createElement('button')
-                    deleteButton.addEventListener('click', () => {
-                        storedIds = storedIds.slice(0, storedIds.indexOf(idSingle))
-                        .concat(storedIds.slice(storedIds.indexOf(idSingle) + 1));
-                        localStorage.setItem('productIds', JSON.stringify(storedIds));
-
-                        // Remove the item from the DOM
-                        cartItem.remove();
-
-                        numberCartItem --
-                        updateCartNumber()
-                    })
-
-                    deleteButton.style.width = '100%'
-                    deleteButton.style.height = '30px'
-                    deleteButton.style.cursor = 'pointer'
-                    deleteButton.innerHTML = (`
-                              <p>delete</p>
-                      `);
-
-                    cartItem.appendChild(deleteButton)
-
-                    cartCatalog.appendChild(cartItem);
-                  });
-
-})
-
-const backButtonCatalog = document.createElement('button')
-backButtonCatalog.textContent = 'Go Back'
-backButtonCatalog.classList.add('buttons')
-backButtonCatalog.style.cursor = 'pointer'
-
-                            
-backButtonCatalog.addEventListener("click", () => {
-  
-    
-    
-    if (productsDivCatalog.contains(backButtonCatalog)){
-      productsDivCatalog.removeChild(backButtonCatalog);
-
-    }
-    
-    window.location.href = '../html/catalog.html' 
-    
-    
-
-})
+function reflectCart() {
+    storedIds.forEach(idSingle => {
+        // console.log(id)
+        fetch(`https://dummyjson.com/products/${idSingle}`)
+                      .then(response => response.json())
+                      .then((product) =>{
+                          const cartItem = document.createElement('div'); // Create an element for each saved item
       
-cartCatalog.appendChild(backButtonCatalog);
+                          const rating = Math.round(product.rating);
+                          const stars = starSOlid.repeat(rating) + starNormal.repeat(5 - rating);
+                          cartItem.innerHTML = (`
+                            <article class="catalog_sec_sec2_article">
+                                <img id="imagePost" class="catalog_sec_sec2_article_image" src="${product.thumbnail}">
+                                <p class="catalog_sec_sec2_article_p">${product.title}</p> 
+                                <span class="catalog_sec_sec2_article_span">
+                                    <p class="catalog_sec_sec2_article_span_p">${product.price} $</p>
+                                    <div class="text-warning">
+                                        ${stars}
+                                    </div>
+                                    <i class="fa-sharp fa-solid fa-cart-plus section3_cart addToCart"></i>
+                                </span> 
+                            </article>
+                          `); 
+      
+      
+                          //damushaveba unda cartshi damatebuls ro vamateb kide shignit cartshive mere ertis washlisas meoresac shlis
+                          const addToCartButton1 = cartItem.querySelector('.addToCart');
+                          addToCartButton1.addEventListener('click', function addToCartButtonEventListener(event){
+                              event.stopPropagation();
+                  
+                              let forIdElement = product.id
+                              console.log(forIdElement);
+                              storedIds.push(forIdElement);  
+                              localStorage.setItem('productIds', JSON.stringify(storedIds));
+                              numberCartItem ++
+                              updateCartNumber()
+
+                              cartCatalog.innerHTML = ''
+                            //   cartCatalog.appendChild(backButtonCatalog);
+
+                              reflectCart()
+      
+                          });
+      
+      
+                          const deleteButton = document.createElement('button')
+                          deleteButton.addEventListener('click', () => {
+                              storedIds = storedIds.slice(0, storedIds.indexOf(idSingle))
+                              .concat(storedIds.slice(storedIds.indexOf(idSingle) + 1));
+                              localStorage.setItem('productIds', JSON.stringify(storedIds));
+      
+                              // Remove the item from the DOM
+                              cartItem.remove();
+      
+                              numberCartItem --
+
+                              updateCartNumber()
+                          })
+      
+                          deleteButton.style.width = '100%'
+                          deleteButton.style.height = '30px'
+                          deleteButton.style.cursor = 'pointer'
+                          deleteButton.innerHTML = (`
+                                    <p>delete</p>
+                            `);
+      
+                          cartItem.appendChild(deleteButton)
+      
+                          cartCatalog.appendChild(cartItem);
+                        });
+      
+      })
+        const backButtonCatalog = document.createElement('button')
+        backButtonCatalog.textContent = 'Go Back'
+        backButtonCatalog.classList.add('buttons')
+        backButtonCatalog.style.cursor = 'pointer'
+
+                                    
+        backButtonCatalog.addEventListener("click", () => {
+            window.location.href = '../html/catalog.html' 
+        })
+            
+        cartCatalog.appendChild(backButtonCatalog);
+
+}
+
+reflectCart()
+
 
 
 
