@@ -12,8 +12,6 @@ cartListDiv.style.gap = '15px 16px'
 
 let storedIds = JSON.parse(localStorage.getItem('productIds')) || [];
 
-// cart item count 
-// let storedIds2 = JSON.parse(localStorage.getItem('productIds')) || [];
 
 let cartItemsNumberP = document.querySelector('.cartItemsNumber')
 
@@ -55,7 +53,6 @@ function reflectCart() {
                           `); 
       
       
-                          //damushaveba unda cartshi damatebuls ro vamateb kide shignit cartshive mere ertis washlisas meoresac shlis
                           const addToCartButton1 = cartItem.querySelector('.addToCart');
                           addToCartButton1.addEventListener('click', function addToCartButtonEventListener(event){
                               event.stopPropagation();
@@ -68,7 +65,6 @@ function reflectCart() {
                               updateCartNumber()
 
                               cartCatalog.innerHTML = ''
-                            //   cartCatalog.appendChild(backButtonCatalog);
 
                               reflectCart()
       
@@ -119,9 +115,11 @@ function reflectCart() {
 reflectCart()
 
 
-
-
-
+function countSingleItem(storage, id) {
+    storage = JSON.parse(localStorage.getItem('productIds')) || [];
+    let itemCartAmount = storedIds.filter(item => item === id);
+    return itemCartAmount.length
+}
 
 
 
@@ -251,6 +249,6 @@ searchInputCart.addEventListener('keyup', (event) => {
 ////cart count
 
 
-  cartItemsNumber111.textContent = (`<p>asdasdasdasd</p>`)
+
 
 

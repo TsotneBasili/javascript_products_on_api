@@ -1067,3 +1067,26 @@
 #load_arrow_image {
     transform: rotate(90deg);
 }
+
+
+.hideDecription {
+    display: none;
+}
+
+.cartButtonDiv {
+    display: flex;
+    justify-content: space-between;
+    font-size: 15px;
+    color: gold;
+    column-gap: 2px;
+}
+
+.minusButtonCart {
+    display: none;
+    background-color: transparent;
+}
+
+.testPassword {
+    background-color:#1A1A1A;
+    color: white;
+}

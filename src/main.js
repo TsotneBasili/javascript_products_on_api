@@ -61,16 +61,25 @@ function createProduct1(div, product1) {
             <p class="forId" style="display: none;">${product1.id}</p>
             <img id="imagePost" class="catalog_sec_sec2_article_image" src="${product1.thumbnail}">
             <p class="catalog_sec_sec2_article_p">${product1.title}</p> 
+            <p class="catalog_sec_sec2_article_p hideDecription">${product1.description}</p> 
             <span class="catalog_sec_sec2_article_span">
                 <p class="catalog_sec_sec2_article_span_p">${product1.price} $</p>
                 <div class="text-warning">
                     ${stars}
                 </div>
-                <i class="fa-sharp fa-solid fa-cart-plus section3_cart addToCart"></i>
+                <div>
+                    <div class ="cartButtonDiv">
+                        <button class="minusButtonCart">-</button>
+                        <p class="cartItemsNumberPP">${countSingleItem(storedIds, product1.id)}</p>
+                    </div>
+                    <i class="fa-sharp fa-solid fa-cart-plus section3_cart addToCart"></i>
+                </div>
             </span> 
         </article>
     `);
+    
 }
+
 
 
 function createProduct(dataPassed, page, productPerPage, div, api = 'default') {
@@ -131,16 +140,22 @@ function createProduct(dataPassed, page, productPerPage, div, api = 'default') {
                     }
 
                     createProduct1(div, product)
+
+                    const element = document.querySelector('.hideDecription');
+                    element.style.display = 'block';
+
+
                     const addToCartButton = div.querySelector('.addToCart');
                     addToCartButton.addEventListener('click', function addToCartButtonEventListener(event){
-                        // event.stopPropagation();
-            
+
                         let forIdElement = product.id
                         console.log(forIdElement);
                         storedIds.push(forIdElement);  //// aq und agaaketo ro ricxvi moematos ukve damatebuls 
                         localStorage.setItem('productIds', JSON.stringify(storedIds));
                         numberCartItem ++
                         updateCartNumber()
+                        console.log(storedIds.length)
+                        // countSingleItem(storedIds, product.id)
                     });
 
                     div.appendChild(backButton);
@@ -148,28 +163,72 @@ function createProduct(dataPassed, page, productPerPage, div, api = 'default') {
         }
 
         productDiv.addEventListener('click', productDiveventListener);
+        
+   
+        const minusButtonCart = productDiv.querySelector('.minusButtonCart');
+        
+        const cartItemsNumberPP = productDiv.querySelector('.cartItemsNumberPP')
+        let singleCartItemN = countSingleItem(storedIds, product.id)
+        if (singleCartItemN > 0) {
+            minusButtonCart.style.display = 'block'
+        }
+            
 
-        const addToCartButton = productDiv.querySelector('.addToCart');
-        addToCartButton.addEventListener('mouseenter', () => {
-            cartHovered = true; // Disable interactions when cart is hovered
-            console.log('Mouse entered cart, product divs disabled.');
+        minusButtonCart.addEventListener('click', (event) => {
+            event.stopPropagation
+
+            let forIdElement = product.id
+            let index = storedIds.indexOf(forIdElement);
+            storedIds = storedIds.slice(0, index)
+            .concat(storedIds.slice(index + 1));
+            localStorage.setItem('productIds', JSON.stringify(storedIds));
+            numberCartItem--
+            updateCartNumber()
+            
+
+            singleCartItemN--
+            cartItemsNumberPP.textContent = singleCartItemN
+            if (singleCartItemN === 0) {
+                minusButtonCart.style.display = 'none'
+            }
+
         });
 
+        minusButtonCart.addEventListener('mouseenter', () => {
+            cartHovered = true; 
+        });
+        minusButtonCart.addEventListener('mouseleave', () => {
+            cartHovered = false; 
+        });
+
+        const addToCartButton = productDiv.querySelector('.addToCart');
+
         addToCartButton.addEventListener('click', function addToCartButtonEventListener(event){
-            // event.stopPropagation();
+            event.stopPropagation
 
             let forIdElement = product.id
             console.log(forIdElement);
-            storedIds.push(forIdElement);  //// aq und agaaketo ro ricxvi moematos ukve damatebuls 
+            storedIds.push(forIdElement);  
             localStorage.setItem('productIds', JSON.stringify(storedIds));
             numberCartItem ++
             updateCartNumber()
+
+            singleCartItemN++
+
+            minusButtonCart.style.display = 'block'
+
+            cartItemsNumberPP.textContent = singleCartItemN
         });
 
+        addToCartButton.addEventListener('mouseenter', () => {
+            cartHovered = true; 
+        });
         addToCartButton.addEventListener('mouseleave', () => {
             cartHovered = false; // Re-enable interactions when mouse leaves cart
             console.log('Mouse left cart, product divs enabled.');
         });
+
+        
 
         div.appendChild(productDiv);
     });
