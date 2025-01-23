@@ -161,19 +161,59 @@ searchInputSignIn.addEventListener('keyup', (event) => {
                         const rating = Math.round(product.rating)
                         const stars = starSOlid.repeat(rating) + starNormal.repeat(5 - rating)
 
+
+
                         sign_in_form_sec.innerHTML = (`
                             <article class="catalog_sec_sec2_article">
-                                <img class="catalog_sec_sec2_article_image" src="${product.thumbnail}">
+                                <p class="forId" style="display: none;">${product.id}</p>
+                                <img id="imagePost" class="catalog_sec_sec2_article_image" src="${product.thumbnail}">
                                 <p class="catalog_sec_sec2_article_p">${product.title}</p> 
+                                <p class="catalog_sec_sec2_article_p hideDecription">${product.description}</p> 
                                 <span class="catalog_sec_sec2_article_span">
                                     <p class="catalog_sec_sec2_article_span_p">${product.price} $</p>
                                     <div class="text-warning">
                                         ${stars}
                                     </div>
-                                    <i class="fa-sharp fa-solid fa-cart-plus section3_cart addToCart"></i>
+                                    <div>
+                                        <div class ="cartButtonDiv">
+                                            <button class="minusButtonCart">-</button>
+                                            <p class="cartItemsNumberPP">${countSingleItem(storedIds, product.id)}</p>
+                                        </div>
+                                        <i class="fa-sharp fa-solid fa-cart-plus section3_cart addToCart"></i>
+                                    </div>
                                 </span> 
                             </article>
                         `);
+
+                        const minusButtonCart = sign_in_form_sec.querySelector('.minusButtonCart');
+        
+                        const cartItemsNumberPP = sign_in_form_sec.querySelector('.cartItemsNumberPP')
+                        let singleCartItemN = countSingleItem(storedIds, product.id)
+                        if (singleCartItemN > 0) {
+                            minusButtonCart.style.display = 'block'
+                        }
+                            
+                        minusButtonCart.addEventListener('click', (event) => {
+                            event.stopPropagation
+                
+                            let forIdElement = product.id
+                            let index = storedIds.indexOf(forIdElement);
+                            storedIds = storedIds.slice(0, index)
+                            .concat(storedIds.slice(index + 1));
+                            localStorage.setItem('productIds', JSON.stringify(storedIds));
+                            numberCartItem--
+                            updateCartNumber()
+                            
+                
+                            singleCartItemN--
+                            cartItemsNumberPP.textContent = singleCartItemN
+                            if (singleCartItemN === 0) {
+                                minusButtonCart.style.display = 'none'
+                            }
+                
+                        });
+                
+
 
                         const addToCartButton1 = sign_in_form_sec.querySelector('.addToCart');
                         addToCartButton1.addEventListener('click', function addToCartButtonEventListener(event){
@@ -185,6 +225,13 @@ searchInputSignIn.addEventListener('keyup', (event) => {
                             localStorage.setItem('productIds', JSON.stringify(storedIds));
                             numberCartItem ++
                             updateCartNumber()
+
+                            singleCartItemN++
+
+                            minusButtonCart.style.display = 'block'
+
+                            cartItemsNumberPP.textContent = singleCartItemN
+    
                         });
 
                         const backButton = document.createElement('button')
