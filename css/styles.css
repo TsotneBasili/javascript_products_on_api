@@ -1023,6 +1023,11 @@
     scrollbar-color: #35a4b8 #023038; */
 }
 
+#buyButton{
+    background-color: rgb(33, 71, 33);
+    border-radius: 5px;
+    width: 400px;
+}
 
 .buttons {
     background-color: #023038;

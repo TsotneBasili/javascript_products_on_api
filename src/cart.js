@@ -1,4 +1,11 @@
 // localStorage.clear();
+// const buyButton = document.querySelector('#buyButton')
+// buyButton.textContent = (`
+//                 Buy (total:${total})
+// `)
+
+
+
 const cartCatalog = document.querySelector('#cartCatalog')
 const cart = document.querySelector('#cart')
 const cartListDiv = document.createElement('div')
@@ -82,6 +89,8 @@ function reflectCart() {
                 
                             singleCartItemN--
                             cartItemsNumberPP.textContent = singleCartItemN
+                            updateTotal()
+
                             if (singleCartItemN === 0) {
                                 minusButtonCart.style.display = 'none'
                                 cartCatalog.innerHTML = ''
@@ -108,6 +117,8 @@ function reflectCart() {
                             minusButtonCart.style.display = 'block'
 
                             cartItemsNumberPP.textContent = singleCartItemN
+                            updateTotal()
+
     
                         });
 
@@ -123,19 +134,21 @@ function reflectCart() {
                             numberCartItem = numberCartItem - singleCartItemN
 
                             updateCartNumber()
+                            updateTotal()
+
                         })
       
-                          deleteButton.style.width = '100%'
-                          deleteButton.style.height = '30px'
-                          deleteButton.style.cursor = 'pointer'
-                          deleteButton.innerHTML = (`
-                                    <p>delete</p>
-                            `);
-      
-                          cartItem.appendChild(deleteButton)
-      
-                          cartCatalog.appendChild(cartItem);
-                        });
+                        deleteButton.style.width = '100%'
+                        deleteButton.style.height = '30px'
+                        deleteButton.style.cursor = 'pointer'
+                        deleteButton.innerHTML = (`
+                                <p>delete</p>
+                        `);
+    
+                        cartItem.appendChild(deleteButton)
+                        
+                        cartCatalog.appendChild(cartItem);
+                    });
       
       })
         const backButtonCatalog = document.createElement('button')
@@ -160,7 +173,6 @@ function countSingleItem(storage, id) {
     let itemCartAmount = storedIds.filter(item => item === id);
     return itemCartAmount.length
 }
-
 
 
 
@@ -269,6 +281,7 @@ searchInputCart.addEventListener('keyup', (event) => {
                             if (singleCartItemN === 0) {
                                 minusButtonCart.style.display = 'none'
                             }
+
                 
                         });
                 
@@ -329,7 +342,41 @@ searchInputCart.addEventListener('keyup', (event) => {
 });
 
 
+///////////////buy button
+const buyButton = document.querySelector('#buyButton')
+
+function updateTotal(){
+
+    let total = 0
+    let storedIds = JSON.parse(localStorage.getItem('productIds')) || [];
+    if (storedIds.length === 0) {
+        total = 0;
+        buyButton.textContent = `
+                                    Buy (total:${total})
+                                `
+    } else {
+        storedIds.forEach(idSingle => {
+            // console.log(id)
+            fetch(`https://dummyjson.com/products/${idSingle}`)
+                          .then(response => response.json())
+                          .then((product) =>{
+                                total += Number(product.price)
+                                console.log(total)
+                                buyButton.textContent = `
+                                    Buy (total:${total})
+                                `
+                          })
+        })
+    }
+     
+}
 
 
+buyButton.addEventListener('click', () => {
+    let storedIds = JSON.parse(localStorage.getItem('productIds')) || [];
+    storedIds = [];
+    localStorage.setItem('productIds', JSON.stringify(storedIds));
+    location.reload();
+})
 
-
+updateTotal()
