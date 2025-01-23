@@ -256,6 +256,12 @@ searchInputSignIn.addEventListener('keyup', (event) => {
                         putProductsSignIn.innerHTML = '';
         
                     }
+
+                    searchInputSignIn.addEventListener('input', () => {
+                        if (searchInputSignIn.value === "") {
+                            putProductsSignIn.innerHTML = ''; // Clear the product suggestions
+                        }
+                    });
                 }
                 
             });

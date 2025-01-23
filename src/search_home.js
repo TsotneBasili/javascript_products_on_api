@@ -156,10 +156,16 @@ searchInputHome.addEventListener('keyup', (event) => {
 
                     })
 
-                    if (searchValueHome === ""){
+                    if (searchValueHome === "" && searchValueHome === " "){
                         putProductsHome.innerHTML = '';
         
                     }
+
+                    searchInputHome.addEventListener('input', () => {
+                        if (searchInputHome.value === "") {
+                            putProductsHome.innerHTML = ''; // Clear the product suggestions
+                        }
+                    });
                 }
                 
             });

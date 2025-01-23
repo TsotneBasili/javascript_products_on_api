@@ -314,6 +314,12 @@ searchInputCart.addEventListener('keyup', (event) => {
                         putProductsCart.innerHTML = '';
         
                     }
+
+                    searchInputCart.addEventListener('input', () => {
+                        if (searchInputCart.value === "") {
+                            putProductsCart.innerHTML = ''; // Clear the product suggestions
+                        }
+                    });
                 }
                 
             });

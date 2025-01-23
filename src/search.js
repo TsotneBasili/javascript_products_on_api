@@ -50,7 +50,7 @@ searchInput.addEventListener('keyup', (event) => {
                     putProducts.appendChild(liProduct); 
 
                     liProduct.addEventListener('click', () => {
-                        // console.log(liProduct)
+
 
                         buttonSection.style.display = 'none'
                         sortSection.style.display = "none"
@@ -159,9 +159,17 @@ searchInput.addEventListener('keyup', (event) => {
 
                         })
                         productsDivCatalog.appendChild(backButton);
-                        
+                        searchValue = ""
 
                     })
+
+                    
+
+                    searchInput.addEventListener('input', () => {
+                        if (searchInput.value === "") {
+                            putProducts.innerHTML = ''; // Clear the product suggestions
+                        }
+                    });
 
                     if (searchValue === ""){
                         putProducts.innerHTML = '';

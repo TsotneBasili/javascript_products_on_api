@@ -154,6 +154,12 @@ searchInputContact.addEventListener('keyup', (event) => {
                         putProductsContact.innerHTML = '';
         
                     }
+
+                    searchInputContact.addEventListener('input', () => {
+                        if (searchInputContact.value === "") {
+                            putProductsContact.innerHTML = ''; // Clear the product suggestions
+                        }
+                    });
                 }
                 
             });
