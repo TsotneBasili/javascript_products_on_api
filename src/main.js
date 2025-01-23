@@ -81,7 +81,6 @@ function createProduct1(div, product1) {
 }
 
 
-
 function createProduct(dataPassed, page, productPerPage, div, api = 'default') {
     let cartHovered = false; // Flag to track if the cart is being hovered
 
@@ -144,8 +143,35 @@ function createProduct(dataPassed, page, productPerPage, div, api = 'default') {
                     const element = document.querySelector('.hideDecription');
                     element.style.display = 'block';
 
+                    const minusButtonCart = document.querySelector('.minusButtonCart');
+        
+                    const cartItemsNumberPP = document.querySelector('.cartItemsNumberPP')
+                    let singleCartItemN = countSingleItem(storedIds, product.id)
+                    if (singleCartItemN > 0) {
+                        minusButtonCart.style.display = 'block'
+                    }
 
-                    const addToCartButton = div.querySelector('.addToCart');
+                    minusButtonCart.addEventListener('click', (event) => {
+                        event.stopPropagation
+            
+                        let forIdElement = product.id
+                        let index = storedIds.indexOf(forIdElement);
+                        storedIds = storedIds.slice(0, index)
+                        .concat(storedIds.slice(index + 1));
+                        localStorage.setItem('productIds', JSON.stringify(storedIds));
+                        numberCartItem--
+                        updateCartNumber()
+                        
+            
+                        singleCartItemN--
+                        cartItemsNumberPP.textContent = singleCartItemN
+                        if (singleCartItemN === 0) {
+                            minusButtonCart.style.display = 'none'
+                        }
+            
+                    });
+
+                    const addToCartButton = document.querySelector('.addToCart');
                     addToCartButton.addEventListener('click', function addToCartButtonEventListener(event){
 
                         let forIdElement = product.id
@@ -154,8 +180,10 @@ function createProduct(dataPassed, page, productPerPage, div, api = 'default') {
                         localStorage.setItem('productIds', JSON.stringify(storedIds));
                         numberCartItem ++
                         updateCartNumber()
-                        console.log(storedIds.length)
-                        // countSingleItem(storedIds, product.id)
+
+                        singleCartItemN++
+                        minusButtonCart.style.display = 'block'
+                        cartItemsNumberPP.textContent = singleCartItemN
                     });
 
                     div.appendChild(backButton);
@@ -229,7 +257,6 @@ function createProduct(dataPassed, page, productPerPage, div, api = 'default') {
         });
 
         
-
         div.appendChild(productDiv);
     });
 }
@@ -558,6 +585,3 @@ function handleCatalogClick() {
 catalogSecButton2.addEventListener('click', handleCatalogClick);
 
 
-
-
-//cart item number

@@ -941,31 +941,6 @@
 
 
 
-/* #formId {
-    position: relative;
-
-}
-
-#formIdHome {
-    position: relative;
-
-}
-
-#formIdContact {
-    position: relative;
-
-}
-
-#formIdSignIn {
-    position: relative;
-
-}
-
-#formIdCart {
-    position: relative;
-
-} */
-
 #putProducts {
     display: flex;
     flex-direction: column;
@@ -978,10 +953,6 @@
     background-color: #023038;
     font-family: "Inter", serif;
 
-    /* overflow-y: scroll;
-    height: 100px;
-    scrollbar-width: thin; 
-    scrollbar-color: #35a4b8 #023038; */
 }
 
 #putProductsHome {
@@ -996,10 +967,6 @@
     background-color: #023038;
     font-family: "Inter", serif;
 
-    /* overflow-y: scroll;
-    height: 100px;
-    scrollbar-width: thin; 
-    scrollbar-color: #35a4b8 #023038; */
 }
 
 #putProductsContact {
@@ -1084,6 +1051,8 @@
 .minusButtonCart {
     display: none;
     background-color: transparent;
+    border-radius: 5px;
+
 }
 
 .testPassword {

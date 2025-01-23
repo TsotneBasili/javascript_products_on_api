@@ -1,6 +1,4 @@
 // localStorage.clear();
-
-
 const cartCatalog = document.querySelector('#cartCatalog')
 const cart = document.querySelector('#cart')
 const cartListDiv = document.createElement('div')
@@ -29,7 +27,8 @@ function updateCartNumber() {
 updateCartNumber()
 
 function reflectCart() {
-    storedIds.forEach(idSingle => {
+    const uniqueIds = [...new Set(storedIds)];
+    uniqueIds.forEach(idSingle => {
         // console.log(id)
         fetch(`https://dummyjson.com/products/${idSingle}`)
                       .then(response => response.json())
@@ -38,52 +37,93 @@ function reflectCart() {
       
                           const rating = Math.round(product.rating);
                           const stars = starSOlid.repeat(rating) + starNormal.repeat(5 - rating);
-                          cartItem.innerHTML = (`
+                          cartItem.innerHTML = 
+                          (`
                             <article class="catalog_sec_sec2_article">
+                                <p class="forId" style="display: none;">${product.id}</p>
                                 <img id="imagePost" class="catalog_sec_sec2_article_image" src="${product.thumbnail}">
                                 <p class="catalog_sec_sec2_article_p">${product.title}</p> 
+                                <p class="catalog_sec_sec2_article_p hideDecription">${product.description}</p> 
                                 <span class="catalog_sec_sec2_article_span">
                                     <p class="catalog_sec_sec2_article_span_p">${product.price} $</p>
                                     <div class="text-warning">
                                         ${stars}
                                     </div>
-                                    <i class="fa-sharp fa-solid fa-cart-plus section3_cart addToCart"></i>
+                                    <div>
+                                        <div class ="cartButtonDiv">
+                                            <button class="minusButtonCart">-</button>
+                                            <p class="cartItemsNumberPP">${countSingleItem(storedIds, product.id)}</p>
+                                        </div>
+                                        <i class="fa-sharp fa-solid fa-cart-plus section3_cart addToCart"></i>
+                                    </div>
                                 </span> 
                             </article>
-                          `); 
+                        `);
       
-      
-                          const addToCartButton1 = cartItem.querySelector('.addToCart');
-                          addToCartButton1.addEventListener('click', function addToCartButtonEventListener(event){
-                              event.stopPropagation();
-                  
-                              let forIdElement = product.id
-                              console.log(forIdElement);
-                              storedIds.push(forIdElement);  
-                              localStorage.setItem('productIds', JSON.stringify(storedIds));
-                              numberCartItem ++
-                              updateCartNumber()
+                        const minusButtonCart = cartItem.querySelector('.minusButtonCart');
+        
+                        const cartItemsNumberPP = cartItem.querySelector('.cartItemsNumberPP')
+                        let singleCartItemN = countSingleItem(storedIds, product.id)
+                        if (singleCartItemN > 0) {
+                            minusButtonCart.style.display = 'block'
+                        }
+                            
+                        minusButtonCart.addEventListener('click', (event) => {
+                            event.stopPropagation
+                
+                            let forIdElement = product.id
+                            let index = storedIds.indexOf(forIdElement);
+                            storedIds = storedIds.slice(0, index)
+                            .concat(storedIds.slice(index + 1));
+                            localStorage.setItem('productIds', JSON.stringify(storedIds));
+                            numberCartItem--
+                            updateCartNumber()
+                            
+                
+                            singleCartItemN--
+                            cartItemsNumberPP.textContent = singleCartItemN
+                            if (singleCartItemN === 0) {
+                                minusButtonCart.style.display = 'none'
+                                cartCatalog.innerHTML = ''
+                                reflectCart()
+                            }
+                
+                        });
+                
 
-                              cartCatalog.innerHTML = ''
 
-                              reflectCart()
-      
-                          });
-      
-      
-                          const deleteButton = document.createElement('button')
-                          deleteButton.addEventListener('click', () => {
-                              storedIds = storedIds.slice(0, storedIds.indexOf(idSingle))
-                              .concat(storedIds.slice(storedIds.indexOf(idSingle) + 1));
-                              localStorage.setItem('productIds', JSON.stringify(storedIds));
-      
-                              // Remove the item from the DOM
-                              cartItem.remove();
-      
-                              numberCartItem --
+                        const addToCartButton1 = cartItem.querySelector('.addToCart');
+                        addToCartButton1.addEventListener('click', function addToCartButtonEventListener(event){
+                            event.stopPropagation();
+                
+                            let forIdElement = product.id
+                            console.log(forIdElement);
+                            storedIds.push(forIdElement);  
+                            localStorage.setItem('productIds', JSON.stringify(storedIds));
+                            numberCartItem ++
+                            updateCartNumber()
 
-                              updateCartNumber()
-                          })
+                            singleCartItemN++
+
+                            minusButtonCart.style.display = 'block'
+
+                            cartItemsNumberPP.textContent = singleCartItemN
+    
+                        });
+
+                        
+    
+                        const deleteButton = document.createElement('button')
+                        deleteButton.addEventListener('click', () => {
+                            storedIds = storedIds.filter(num => num !== idSingle);
+                            localStorage.setItem('productIds', JSON.stringify(storedIds));
+    
+                            cartItem.remove();
+    
+                            numberCartItem = numberCartItem - singleCartItemN
+
+                            updateCartNumber()
+                        })
       
                           deleteButton.style.width = '100%'
                           deleteButton.style.height = '30px'
@@ -153,16 +193,10 @@ function searchButtonCartListener(event) {
 magnifyingGlassCart.addEventListener('click', searchButtonCartListener)
 
 
-
 const searchInputCart = document.getElementById('searchInputCart');
 
 
-
-
-
 let searchValueCart = '';
-
-
 
 
 searchInputCart.addEventListener('keyup', (event) => {
@@ -213,7 +247,6 @@ searchInputCart.addEventListener('keyup', (event) => {
                             updateCartNumber()
                         });
 
-                        // sign_in_form_sec.style.width = '400px'
 
                         const backButton = document.createElement('button')
                         backButton.textContent = 'Go Back'
@@ -225,8 +258,6 @@ searchInputCart.addEventListener('keyup', (event) => {
                             
                             window.location.href = '../html/cart.html'
                             
-                           
-
                         })
                         cartCatalog.appendChild(backButton);
                         
@@ -245,8 +276,6 @@ searchInputCart.addEventListener('keyup', (event) => {
 })
 });
 
-
-////cart count
 
 
 
