@@ -4,25 +4,31 @@ const categoriesDiv = document.createElement('div')
 categoriesDiv.classList.add('categoriesDiv')
 
 
-
-
-
 let filterCategoriesCount = 0
 
-function filterCategoriesEventListener (){
 
-    filterCategoriesCount += 1
+function filterCategoriesEventListener(event) {
+    event.stopPropagation(); // Prevents the document click event from firing immediately
 
-    if (filterCategoriesCount % 2 === 1){
-        createFiltercategory()
-        filterSection.appendChild(categoriesDiv)
-    } else {      
-        filterSection.removeChild(categoriesDiv)
+    filterCategoriesCount += 1;
+
+    if (filterCategoriesCount % 2 === 1) {
+        createFiltercategory(); // Ensure this function exists
+        filterSection.appendChild(categoriesDiv);
+    } else {
+        filterSection.removeChild(categoriesDiv);
     }
-    
 }
 
-filterCategories.addEventListener('click', filterCategoriesEventListener)
+filterCategories.addEventListener('click', filterCategoriesEventListener);
+
+// Close the filter when clicking outside
+document.addEventListener("click", (event) => {
+    if (!filterSection.contains(event.target) && filterCategoriesCount % 2 === 1) {
+        filterCategoriesCount = 0; // Reset count to avoid errors
+        filterSection.removeChild(categoriesDiv);
+    }
+});
 
 
 
@@ -50,7 +56,6 @@ function createFiltercategory() {
                         productsDivCatalog.innerHTML = ''
                         createProduct(category, 0, category.length, productsDivCatalog, api=`${category}`)
                         
-
 
                     });
                 }
